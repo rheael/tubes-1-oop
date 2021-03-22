@@ -1,6 +1,8 @@
 //Include engimon
 //Include element
 //Include skill
+#include "Engimon.hpp"
+#include "Point.hpp"
 
 #include <vector>
 #include <iostream>
@@ -29,6 +31,8 @@ class Player {
         void displayInventorySkill();
         void displayInventoryEngimon();
         void learnSkill(Engimon E, Skill S);
+        void battle(Engimon musuh);
+        int sumBasePowMastery(Engimon);
 };
 
 template <class T> //T bisa berupa Skill atau Engimon

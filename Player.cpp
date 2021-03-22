@@ -79,3 +79,72 @@ void Player learnSkill(Engimon E, Skill S) {
     // Kalo ada, skill engimon tidak bertambah, ngasih pesan "kamu udah punya skill ini"
     // Kalo gak ada, skill engimon bertambah
 }
+
+void Player::battle(Engimon musuh){
+    /* Bandingkan power musuh dan power engimon player
+    *         
+    * POWER :
+    * level * element advantage
+    * SUM(every skill's base power * Mastery level)
+    * -------------------------- +
+    */
+
+   // level = atribut level dari kelas engimon
+   // element advantage = matriks dari kelas elemen
+   // skill's base power = atribut dari kelas skill
+   // mastery level = atribut dari kelas skill
+
+   // mungkin bikin fungsi sum(base power * mastery lv)
+   // print ascii keterangan menang/kalah
+
+    Engimon& currentEngimon = this.getActiveEngimon();
+    // find element advantage
+    // int myElmAdvantage = ...
+    // int enmElmAdvantage = ...
+
+    int myPower = currentEngimon.getLevel() * myElmAdvantage +
+                sumBasePowMastery(currentEngimon);
+
+    int enemyPower = musuh.getLevel() * enmElmAdvantage +
+                sumBasePowMastery(musuh);
+
+    if(myPower>enemyPower){
+        // print ascii win message
+
+        // active engimon menerima exp
+        // asumsi besarannya 35
+        currentEngimon.addExp(35);
+        
+        // mendapatkan engimon lawan
+        addEngimon(musuh);
+
+        // mendapatkan random skill kompatibel dengan elemen musuh
+        // mungkin dibikin generateRandomSkill based on engimon's element
+
+    } else if (myPower==enemyPower){
+        // print ascii draw message
+        // klo seri ngapain ya?
+        
+    } else{
+        // print ascii lose message
+        
+        // engimon akan mati
+        currentEngimon.die();
+
+        // player bs pilih command kek biasa
+    }
+
+    // BELUM NANGANIN KASUS MULTIPLE ELEMENT ENGIMON
+
+}
+
+int Player::sumBasePowMastery(Engimon E){
+    int sum = 0;
+    /*
+    // iterate through all engimon's skill
+    for(int i=0; i<4;i++){ // max elm 4
+        sum = sum + E.getSkill()[i].getNilaiNumerik() * 
+        E.getSkill()[i].getMasteryLevel();
+    }*/
+    return sum;
+}
