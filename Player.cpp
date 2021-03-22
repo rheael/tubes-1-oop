@@ -73,21 +73,20 @@ void Player::displayInventoryEngimon() {
     }
 }
 
-void Player learnSkill(Engimon E, Skill S) {
+void Player::learnSkill(Engimon E, Skill S) {
     // Cek apakah skill engimon udah 4
     // Cek apakah elemen engimon tersebut ada di prereq learn skill tsb
     // Kalo ada, skill engimon tidak bertambah, ngasih pesan "kamu udah punya skill ini"
     // Kalo gak ada, skill engimon bertambah
 }
-
+/*
 void Player::battle(Engimon musuh){
-    /* Bandingkan power musuh dan power engimon player
-    *         
-    * POWER :
-    * level * element advantage
-    * SUM(every skill's base power * Mastery level)
-    * -------------------------- +
-    */
+    // Bandingkan power musuh dan power engimon player
+            
+    // POWER :
+    // level * element advantage
+    // SUM(every skill's base power * Mastery level)
+    // -------------------------- +
 
    // level = atribut level dari kelas engimon
    // element advantage = matriks dari kelas elemen
@@ -124,7 +123,7 @@ void Player::battle(Engimon musuh){
     } else if (myPower==enemyPower){
         // print ascii draw message
         // klo seri ngapain ya?
-        
+
     } else{
         // print ascii lose message
         
@@ -136,15 +135,39 @@ void Player::battle(Engimon musuh){
 
     // BELUM NANGANIN KASUS MULTIPLE ELEMENT ENGIMON
 
-}
+}*/
 
 int Player::sumBasePowMastery(Engimon E){
     int sum = 0;
     /*
-    // iterate through all engimon's skill
+    // iterate through all engimon's skill (butuh skill)
     for(int i=0; i<4;i++){ // max elm 4
         sum = sum + E.getSkill()[i].getNilaiNumerik() * 
         E.getSkill()[i].getMasteryLevel();
     }*/
     return sum;
 }
+/*
+void breeding(Engimon& bapak, Engimon& emak){
+    // cek level bapak emak
+    bool cukupumur = false;
+    if(bapak.level >= 30 && emak.level>=30){
+        cukupumur = true;
+    }
+
+    if(cukupumur){ // sudah boleh kawin
+        // level parent berkurang 30
+        // mungkin nanti di kelas engimon bisa dibikin method level down
+        // bapak.levelDown(30);
+        // emak.levelDown(30);
+
+        // memberikan nama uwu
+        string namaAnak;
+        cout << "Masukan nama buah hati dari" <<
+            bapak.getName() << "dan" << emak.getName()
+            << " : ";
+        cin >> namaAnak;
+
+        // inherit skill
+    }
+}*/
