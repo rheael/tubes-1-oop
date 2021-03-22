@@ -12,6 +12,13 @@ const char Point::grass[] = {'F','E','G','L','N'};
 const char Point::sea[] = {'W','I','S'};
 
 // Ctor, cctor, dtor, operator assignment (Kayaknya yang perlu cuma ctor)
+Point::Point() {
+    this->x=0;
+    this->y=0;
+    this->type=' ';
+    this->chara=' ';
+}
+
 Point::Point(int x, int y, char t) {
     this->x = x;
     this->y = y;

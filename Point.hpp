@@ -19,6 +19,7 @@ private:
     static const char sea[]; // Array simbol engimon sea
 public:
     // Ctor, cctor, dtor, operator assignment (Kayaknya yang perlu cuma ctor)
+    Point();
     Point(int x, int y, char t);
     Point(const Point& other);
     ~Point();

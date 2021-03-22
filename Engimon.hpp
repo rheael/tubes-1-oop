@@ -1,4 +1,4 @@
-#include "Skill.cpp"  // ini butuh kelas skill :D
+#include "Skill.cpp" // ini butuh kelas skill :D
 #include <iostream>
 using namespace std;
 
