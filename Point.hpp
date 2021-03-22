@@ -22,7 +22,7 @@ public:
     Point();
     Point(int x, int y, char t);
     Point(const Point& other);
-    ~Point();
+    //~Point();
     Point& operator=(const Point& other);
 
     // Getter

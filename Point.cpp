@@ -49,9 +49,9 @@ Point::Point(const Point& other) {
     this->chara = other.chara;
 }
 
-Point::~Point() {
+/*Point::~Point() {
     cout << "Point (" << this->x << "," << this->y << ") destroyed" << endl;
-}
+}*/
 
 Point& Point::operator=(const Point& other) {
     this->x = other.x;

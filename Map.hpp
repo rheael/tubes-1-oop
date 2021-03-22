@@ -25,8 +25,9 @@ class Map {
         char getMapCharaAt(int,int);
         char getMapTypeAt(int,int);
         void spawnWildEngimon();
-        void getPlayerMove(char*);
-        Point getPlayerPosition();
+        void getMove(string,char);
+        Point getPosition(char);
+        bool isAuthorized(char, int, int);
 };
 
 #endif
