@@ -11,7 +11,13 @@ int main() {
     while(input!="end") {
         cin >> input;
         // to make player move {
-        m.getMove(input,'P');
+        try {
+            (m.getMove(input,'P'));
+        } 
+        catch (int x) {
+            cout << "Invalid move!\n";
+        }
+        //m.spawnWildEngimon();
         m.displayMap();
     }
     return 0;

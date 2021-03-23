@@ -3,6 +3,8 @@
 #ifndef _MAP_HPP
 #define _MAP_HPP
 #include "Point.hpp"
+#include "Engimon.hpp"
+#include "Skill.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>

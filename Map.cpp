@@ -1,15 +1,11 @@
 #include "Map.hpp"
 #include "Point.hpp"
+// #include "Engimon.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <string.h>
 #include <sstream>
-
-// to - do : spawn engimons
-// determine max spawned engimon (based on player's input, maybe on main)
-// display based on capitalized or not
-// exception handling etc
 
 Map::Map() {
     char ch;
@@ -66,12 +62,27 @@ char Map::getMapTypeAt(int x,int y) {
 }
 
 void Map::spawnWildEngimon() {
-    // handle max spawned engimon
-    int i=rand();
+    // handle max spawned engimon, user?
+    /*int i=rand();
     int j=rand();
-    // set chara at int i and j
-    // new Engimon
-    // the attribute and type will probably be based on the randomized integer
+    // randomize the x and y first, if it is modulo something then spawn
+    // after that, the tile used will be (i%12 and j%9) 
+    // know the tile,
+    if((i+j)%7) {
+        int newX=i%12;
+        int newY=j%9;
+        bool engimonSpawned = false;
+        if(i%2==0) {
+            if(map[newX][newY].getType()=='-') { // also the type of tile
+                Engimon* wildEngi= new Charmamon("Wildcharm"); // w/ parameters?
+                setMapCharaAt(newX, newY, 'f');
+            }
+            else {
+                Engimon* wildEngi = new Snommon("Wildsnom"); // w/ parameters
+                setMapCharaAt(newX, newY, 'i');
+            }
+        }
+    }*/
 }
 
 void Map::getMove(string move, char chara) {
@@ -102,7 +113,7 @@ void Map::getMove(string move, char chara) {
         setMapCharaAt(x,y,' ');
     }
     else {
-        throw newX, newY;  // exception?
+        throw(0);
     }
 } 
 
@@ -121,10 +132,11 @@ Point Map::getPosition(char chara) {
     return charaPosition;
 }
 
-bool Map::isAuthorized(char chara, int i, int j) {
+bool Map::isAuthorized(char chara, int col, int ro) {
     /* determine whether the char can access the map or not */
     /* later for engimon */
-    return(map[i][j].getType()!=' ');
+    return(col>=0 && col<column && ro>=0 && ro<row);
+    // compatible tile with engimons
 }
 
 /* 
