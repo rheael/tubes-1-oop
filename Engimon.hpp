@@ -1,5 +1,6 @@
-#include "Skill.cpp" // ini butuh kelas skill :D
+#include "Skill.cpp"  // ini butuh kelas skill :D
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Engimon{
@@ -43,6 +44,7 @@ class Engimon{
 
 class Charmamon: public Engimon{
     protected:
+        static const Element elemen;
         static const Skill uniqueSkill;
         static const string parentSpecies;
     public:
@@ -64,6 +66,7 @@ class Charmamon: public Engimon{
 
 class Squirtlmon: public Engimon{
     protected:
+        static const Element elemen;
         static const Skill uniqueSkill;
         static const string parentSpecies;
     public:
@@ -85,6 +88,7 @@ class Squirtlmon: public Engimon{
 
 class Pikamon: public Engimon{
     protected:
+        static const Element elemen;
         static const Skill uniqueSkill;
         static const string parentSpecies;
     public:
@@ -106,6 +110,7 @@ class Pikamon: public Engimon{
 
 class Rumblemon: public Engimon{
     protected:
+        static const Element elemen;
         static const Skill uniqueSkill;
         static const string parentSpecies;
     public:
@@ -127,6 +132,7 @@ class Rumblemon: public Engimon{
 
 class Snommon: public Engimon{
     protected:
+        static const Element elemen;
         static const Skill uniqueSkill;
         static const string parentSpecies;
     public:
@@ -148,6 +154,7 @@ class Snommon: public Engimon{
 
 class Rotomon: public Engimon{
     protected:
+        static const Element elemen;
         static const Skill uniqueSkill;
         string parent1Species;
         string parent2Species;
@@ -171,6 +178,7 @@ class Rotomon: public Engimon{
 
 class Sealmon: public Engimon{
     protected:
+        static const Element elemen;
         static const Skill uniqueSkill;
         string parent1Species;
         string parent2Species;
@@ -194,6 +202,7 @@ class Sealmon: public Engimon{
 
 class Gastromon: public Engimon{
     protected:
+        static const Element elemen;
         static const Skill uniqueSkill;
         string parent1Species;
         string parent2Species;

@@ -1,6 +1,7 @@
 #include "Engimon.hpp"
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 // -------------- BASE CLASS : ENGIMON ------------------
@@ -35,6 +36,7 @@ Engimon::Engimon(string nama, string napar1, string napar2){
     this->exp = 0;
     this->cumulativeExp = 0;
     this->numAbility = 0;
+
 }
 
 Engimon::Engimon(const Engimon& other){
@@ -105,7 +107,12 @@ void Engimon::showData(){
     cout << "Level: "<<this->level << endl;
     cout << "Exp: " << this->exp << endl;
     cout << "Cumulative Exp: "<<this->cumulativeExp << endl;
-    cout << "Skills: "; // cetak skill
+    cout << "Skills: " ; 
+    for (int i = 0; i < 4; i++)
+    {
+        string nama = ability[i].getnama();
+        cout<<nama;
+    }
     cout << endl;
     cout << "Parent's name: " << this->parent1name << ", "<<this->parent2name << endl;
 }
@@ -114,7 +121,7 @@ bool Engimon::punyaSkill(Skill s){
     bool found = false;
     int i = 0;
     while (!found && i < this->numAbility){
-        if (this->ability[i].getNama() == s.getNama()){
+        if (this->ability[i].getnama() == s.getnama()){
             found = true;
         }
         i++;
@@ -123,7 +130,10 @@ bool Engimon::punyaSkill(Skill s){
 }
 
 // -------DERIVED CLASS : FIRE ENGIMONS ----------------
-Skill a("Blaze");
+string arr_fire [] = {"Fire"};
+Skill a("Blaze",10,1,1,arr_fire);
+Element fire(1,arr_fire);
+const Element Charmamon:: elemen = fire;
 const Skill Charmamon::uniqueSkill = a;
 const string Charmamon::parentSpecies = "Charmamon";
 
@@ -168,7 +178,10 @@ bool Charmamon::punyaElemen(string elem){
 }
 
 // -------DERIVED CLASS : WATER ENGIMONS ----------------
-Skill b("Torrent");
+string arr_water [] = {"Water"};
+Skill b("Torrent",10,1,1,arr_water);
+Element water(1,arr_water);
+const Element Squirtlmon:: elemen = water;
 const Skill Squirtlmon::uniqueSkill = b;
 const string Squirtlmon::parentSpecies = "Squirtlmon";
 
@@ -209,8 +222,10 @@ bool Squirtlmon::punyaElemen(string elem){
 }
 
 // -------DERIVED CLASS : ELECTRIC ENGIMONS ----------------
-
-Skill c("Static");
+string arr_electric [] = {"Electric"};
+Skill c("Static",10,1,1,arr_electric);
+Element electric(1,arr_electric);
+const Element Pikamon:: elemen = electric;
 const Skill Pikamon::uniqueSkill = c;
 const string Pikamon::parentSpecies = "Pikamon";
 
@@ -251,7 +266,10 @@ bool Pikamon::punyaElemen(string elem){
 }
 
 // -------DERIVED CLASS : GROUND ENGIMONS ----------------
-Skill d("Sand Veil");
+string arr_ground [] = {"Ground"};
+Skill d("Sand Veil",10,1,1,arr_ground);
+Element ground(1,arr_ground);
+const Element Rumblemon:: elemen = ground;
 const Skill Rumblemon::uniqueSkill = d;
 const string Rumblemon::parentSpecies = "Rumblemon";
 
@@ -292,7 +310,10 @@ bool Rumblemon::punyaElemen(string elem){
 }
 
 // -------DERIVED CLASS : ICE ENGIMONS ----------------
-Skill e("Ice body");
+string arr_ice [] = {"Ice"};
+Skill e("Ice body",10,1,1,arr_ice);
+Element ice(1,arr_ice);
+const Element Snommon:: elemen = ice;
 const Skill Snommon::uniqueSkill = e;
 const string Snommon::parentSpecies = "Snommon";
 
@@ -333,8 +354,11 @@ bool Snommon::punyaElemen(string elem){
 }
 
 // -------DERIVED CLASS : ELECTROFIRE ENGIMONS ----------------
-Skill f("Levitate");
+string arr_electrofire []= {"Fire", "Electric"};
+Element electrofire(2,arr_electrofire);
+Skill f("Levitate",10,1,2,arr_electrofire);
 const Skill Rotomon::uniqueSkill = f;
+const Element Rotomon:: elemen = electrofire;
 
 Rotomon::Rotomon(): Engimon(){
     this->ability[0] = uniqueSkill;
@@ -385,8 +409,11 @@ bool Rotomon::punyaElemen(string elem){
 }
 
 // -------DERIVED CLASS : ICE/WATER ENGIMONS ----------------
-Skill g("Thick fat");
+string arr_icewater[] = {"Ice", "water"};
+Skill g("Thick fat", 10, 1, 2, arr_icewater);
+Element icewater(2,arr_icewater);
 const Skill Sealmon::uniqueSkill = g;
+const Element Sealmon:: elemen = icewater;
 
 Sealmon::Sealmon(): Engimon(){
     this->ability[0] = uniqueSkill;
@@ -437,8 +464,11 @@ bool Sealmon::punyaElemen(string elem){
 }
 
 // -------DERIVED CLASS : WATER/GROUND ENGIMONS ----------------
-Skill h("Sticky hold");
+string arr_waterground [] = {"Water", "Ground"};
+Skill h("Sticky hold",10,1,2,arr_waterground);
+Element waterground(2,arr_waterground);
 const Skill Gastromon::uniqueSkill = h;
+const Element Gastromon:: elemen = waterground;
 
 Gastromon::Gastromon(): Engimon(){
     this->ability[0] = uniqueSkill;
