@@ -49,9 +49,9 @@ void Player::keKiri() {
 
 Point Player::getPosition() {return Position;}
 
-Engimon Player::getActiveEngimon() {return activeEngimon;}
+Engimon& Player::getActiveEngimon() {return activeEngimon;}
 
-void Player::changeActiveEngimon(Engimon newActiveEngimon) {
+void Player::changeActiveEngimon(Engimon& newActiveEngimon) {
     activeEngimon = newActiveEngimon;
 }
 
@@ -73,14 +73,14 @@ void Player::displayInventoryEngimon() {
     }
 }
 
-void Player::learnSkill(Engimon E, Skill S) {
+void Player::learnSkill(Engimon& E, Skill S) {
     // Cek apakah skill engimon udah 4
     // Cek apakah elemen engimon tersebut ada di prereq learn skill tsb
     // Kalo ada, skill engimon tidak bertambah, ngasih pesan "kamu udah punya skill ini"
     // Kalo gak ada, skill engimon bertambah
 }
-/*
-void Player::battle(Engimon musuh){
+
+void Player::battle(Engimon& musuh){
     // Bandingkan power musuh dan power engimon player
             
     // POWER :
@@ -115,7 +115,7 @@ void Player::battle(Engimon musuh){
         currentEngimon.addExp(35);
         
         // mendapatkan engimon lawan
-        addEngimon(musuh);
+        InventoryEngimon.addEngimon(musuh);
 
         // mendapatkan random skill kompatibel dengan elemen musuh
         // mungkin dibikin generateRandomSkill based on engimon's element
@@ -134,10 +134,12 @@ void Player::battle(Engimon musuh){
     }
 
     // BELUM NANGANIN KASUS MULTIPLE ELEMENT ENGIMON
+    // mungkin nanti dibikin method getAdvMultipleElmEngimon();
+    // ato jadiin method overloading buat engimon dgn multiple elm
 
-}*/
+}
 
-int Player::sumBasePowMastery(Engimon E){
+int Player::sumBasePowMastery(Engimon& E){
     int sum = 0;
     /*
     // iterate through all engimon's skill (butuh skill)
@@ -147,11 +149,11 @@ int Player::sumBasePowMastery(Engimon E){
     }*/
     return sum;
 }
-/*
+
 void breeding(Engimon& bapak, Engimon& emak){
     // cek level bapak emak
     bool cukupumur = false;
-    if(bapak.level >= 30 && emak.level>=30){
+    if(bapak.getLevel() >= 30 && emak.getLevel()>=30){
         cukupumur = true;
     }
 
@@ -161,13 +163,17 @@ void breeding(Engimon& bapak, Engimon& emak){
         // bapak.levelDown(30);
         // emak.levelDown(30);
 
-        // memberikan nama uwu
+        // memberikan nama anak
         string namaAnak;
         cout << "Masukan nama buah hati dari" <<
             bapak.getName() << "dan" << emak.getName()
             << " : ";
         cin >> namaAnak;
 
+        // construct engimon baru (mesti nentuin elmnya dulu)
+        // bikin method buat nentuin elemen anak
+        // Engimon* anak = new Engimon(namaAnak, bapak.getName(), emak.getName());
+
         // inherit skill
     }
-}*/
+}

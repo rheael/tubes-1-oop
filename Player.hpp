@@ -10,8 +10,8 @@ using namespace std;
 
 class Player {
     private:
-        // Point Position;
-        // Engimon activeEngimon;
+        Point Position;
+        Engimon& activeEngimon;
         Inventory<InventoryItem<Skill>> InventorySkill;
         Inventory<InventoryItem<Engimon>> InventoryEngimon;
         int nbInventory;
@@ -25,15 +25,15 @@ class Player {
         void keKiri();
         Point getPosition();
         void setPosition(int X, int Y);
-        Engimon getActiveEngimon();
-        void changeActiveEngimon(Engimon newActiveEngimon);
+        Engimon& getActiveEngimon();
+        void changeActiveEngimon(Engimon& newActiveEngimon);
         void interactActiveEngimon();
         void displayInventorySkill();
         void displayInventoryEngimon();
-        void learnSkill(Engimon E, Skill S);
-        void battle(Engimon musuh);
-        int sumBasePowMastery(Engimon);
-        void breeding(Engimon bapak, Engimon emak);
+        void learnSkill(Engimon& E, Skill S);
+        void battle(Engimon& musuh);
+        int sumBasePowMastery(Engimon&);
+        void breeding(Engimon& bapak, Engimon& emak);
 };
 
 template <class T> //T bisa berupa Skill atau Engimon
