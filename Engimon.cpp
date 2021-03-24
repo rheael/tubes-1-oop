@@ -125,6 +125,9 @@ void Engimon::showData(){
     cout << "Skills: " ; 
     for (int i = 0; i < 4; i++)
     {
+        if (i != 0) {
+            cout << ", ";
+        }
         string nama = ability[i].getnama();
         cout<<nama;
     }
@@ -144,19 +147,12 @@ bool Engimon::punyaSkill(Skill s){
     return found;
 }
 
-Skill* Engimon::getAbility(){
-    return this->ability;
-}
-
-bool Engimon::isSkillFull(){
-    bool full = true;
-    for(int i=0;i>4;i++){
-        if(this->ability[i].getnama()=="XXX"){
-            full = false;
-            break;
-        }
+void Engimon::addNewSkill(Skill S) {
+    if (numAbility == 4) {
+        cout << getName() << " sudah memiliki 4 skill\n";
+    } else if (numAbility < 4) {
+        ability[numAbility] = S;
     }
-    return full;
 }
 
 // -------DERIVED CLASS : FIRE ENGIMONS ----------------
@@ -169,14 +165,17 @@ const string Charmamon::parentSpecies = "Charmamon";
 
 Charmamon::Charmamon(): Engimon(){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 Charmamon::Charmamon(string nama):Engimon(nama){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 Charmamon::Charmamon(string nama, string napar1, string napar2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 Skill Charmamon::getuniqueSkill(){
@@ -226,14 +225,17 @@ const string Squirtlmon::parentSpecies = "Squirtlmon";
 
 Squirtlmon::Squirtlmon(): Engimon(){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 Squirtlmon::Squirtlmon(string nama):Engimon(nama){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 Squirtlmon::Squirtlmon(string nama, string napar1, string napar2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 
@@ -285,14 +287,17 @@ const string Pikamon::parentSpecies = "Pikamon";
 
 Pikamon::Pikamon(): Engimon(){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 Pikamon::Pikamon(string nama):Engimon(nama){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 Pikamon::Pikamon(string nama, string napar1, string napar2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 string Pikamon::getParent1Species(){
@@ -339,14 +344,17 @@ const string Rumblemon::parentSpecies = "Rumblemon";
 
 Rumblemon::Rumblemon(): Engimon(){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 Rumblemon::Rumblemon(string nama):Engimon(nama){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 Rumblemon::Rumblemon(string nama, string napar1, string napar2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 string Rumblemon::getParent1Species(){
@@ -393,14 +401,17 @@ const string Snommon::parentSpecies = "Snommon";
 
 Snommon::Snommon(): Engimon(){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 Snommon::Snommon(string nama):Engimon(nama){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 Snommon::Snommon(string nama, string napar1, string napar2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
+    numAbility++;
 }
 
 string Snommon::getParent1Species(){
@@ -448,24 +459,28 @@ Rotomon::Rotomon(): Engimon(){
     this->ability[0] = uniqueSkill;
     this->parent1Species = "Charmamon";
     this->parent2Species = "Pikamon";
+    numAbility++;
 }
 
 Rotomon::Rotomon(string nama):Engimon(nama){
     this->ability[0] = uniqueSkill;
     this->parent1Species = "Charmamon";
     this->parent2Species = "Pikamon";
+    numAbility++;
 }
 
 Rotomon::Rotomon(string nama, string napar1, string napar2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
     this->parent1Species = "Charmamon";
     this->parent2Species = "Pikamon";
+    numAbility++;
 }
 
 Rotomon::Rotomon(string nama, string napar1, string napar2, string spec1, string spec2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
     this->parent1Species = spec1;
     this->parent2Species = spec2;
+    numAbility++;
 }
 
 string Rotomon::getParent1Species(){
@@ -513,24 +528,28 @@ Sealmon::Sealmon(): Engimon(){
     this->ability[0] = uniqueSkill;
     this->parent1Species = "Snommon";
     this->parent2Species = "Squirtlmon";
+    numAbility++;
 }
 
 Sealmon::Sealmon(string nama):Engimon(nama){
     this->ability[0] = uniqueSkill;
     this->parent1Species = "Snommon";
     this->parent2Species = "Squirtlmon";
+    numAbility++;
 }
 
 Sealmon::Sealmon(string nama, string napar1, string napar2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
     this->parent1Species = "Snommon";
     this->parent2Species = "Squirtlmon";
+    numAbility++;
 }
 
 Sealmon::Sealmon(string nama, string napar1, string napar2, string spec1, string spec2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
     this->parent1Species = spec1;
     this->parent2Species = spec2;
+    numAbility++;
 }
 
 string Sealmon::getParent1Species(){
@@ -578,24 +597,28 @@ Gastromon::Gastromon(): Engimon(){
     this->ability[0] = uniqueSkill;
     this->parent1Species = "Snommon";
     this->parent2Species = "Rumblemon";
+    numAbility++;
 }
 
 Gastromon::Gastromon(string nama):Engimon(nama){
     this->ability[0] = uniqueSkill;
     this->parent1Species = "Snommon";
     this->parent2Species = "Rumblemon";
+    numAbility++;
 }
 
 Gastromon::Gastromon(string nama, string napar1, string napar2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
     this->parent1Species = "Snommon";
     this->parent2Species = "Rumblemon";
+    numAbility++;
 }
 
 Gastromon::Gastromon(string nama, string napar1, string napar2, string spec1, string spec2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
     this->parent1Species = spec1;
     this->parent2Species = spec2;
+    numAbility++;
 }
 
 string Gastromon::getParent1Species(){

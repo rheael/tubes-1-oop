@@ -31,21 +31,25 @@ class Inventory {
         }
 
         void deleteItem(T newItem) {
-            if (isExist(newItem)) { // Mengecek apakah item ada di list
-                for (int i=0; i<NB_ELMT; i++) { // Mencari letak item
-                    if (List[i].getItem() == newItem) {
-                        List[i].setNbItem(List[i].getNbItem()-1); // Mengurangi jumlahnya
+            if (List.size() != 0) {
+                if (isExist(newItem)) { // Mengecek apakah item ada di list
+                    for (int i=0; i<NB_ELMT; i++) { // Mencari letak item
+                        if (List[i].getItem() == newItem) {
+                            List[i].setNbItem(List[i].getNbItem()-1); // Mengurangi jumlahnya
 
-                        if (List[i].getNbItem() == 0) { // Kalau ternyata jmlnya jd 0, kita hapus dari list
-                            List.erase(List.begin()+i);
-                            NB_ELMT--;
+                            if (List[i].getNbItem() == 0) { // Kalau ternyata jmlnya jd 0, kita hapus dari list
+                                List.erase(List.begin()+i);
+                                NB_ELMT--;
+                            }
+
+                            break;
                         }
-
-                        break;
                     }
+                } else {
+                    cout << "Item yang ingin dihapus tidak ada\n";
                 }
             } else {
-                cout << "Item yang ingin dihapus tidak ada\n";
+                cout << "Maaf, kamu tidak mempunyai skill dalam inventory\n";
             }
         }            
 

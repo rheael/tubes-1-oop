@@ -29,18 +29,19 @@ class Player {
         Point* getPosition();
         void setPosition(int X, int Y);
         Engimon* getActiveEngimon();
-        void changeActiveEngimon(Engimon* newActiveEngimon);
+        void changeActiveEngimon();
         void interactActiveEngimon();
         void addSkillToInventory(Skill* S);
         void addEngimonToInventory(Engimon* E);
+        void deleteSkillFromIventory(Skill* S);
+        void deleteEngimonFromInventory(Engimon* E);
         void displayInventorySkill();
         void displayInventoryEngimon();
-        void learnSkill(Engimon* E, Skill S);
+        void learnSkill(Engimon* E);
         void battle(Engimon* musuh);
         int sumBasePowMastery(Engimon*);
         Engimon& breedingSpesies(Engimon& bapak, Engimon& emak);
-        void inheritSkill(Engimon& bapak, Engimon& emak, Engimon& anak);
-        void breeding (Engimon& bapak, Engimon& emak);
+        Element decideChildElm(Engimon& bapak, Engimon& emak);
 };
 
 #endif
