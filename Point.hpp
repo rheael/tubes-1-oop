@@ -21,10 +21,10 @@ private:
 public:
     // Ctor, cctor, dtor, operator assignment (Kayaknya yang perlu cuma ctor)
     Point();
-    Point(int x, int y, char t);
-    Point(const Point& other);
+    //Point(int x, int y, char t);
+    //Point(const Point& other);
     //~Point();
-    Point& operator=(const Point& other);
+    //Point& operator=(const Point& other);
 
     // Getter
     int getX() const;
