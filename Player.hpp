@@ -38,8 +38,8 @@ class Player {
         void learnSkill(Engimon* E, Skill S);
         void battle(Engimon* musuh);
         int sumBasePowMastery(Engimon*);
-        void breeding(Engimon& bapak, Engimon& emak);
-        void decideChildElm(Engimon& bapak, Engimon& emak);
+        Engimon& breedingSpesies(Engimon& bapak, Engimon& emak);
+        Element decideChildElm(Engimon& bapak, Engimon& emak);
 };
 
 #endif

@@ -20,6 +20,7 @@ public:
     int countSkillPower();
     string getnama();
     Element getelemen();
+    friend bool operator==(Skill& s1, Skill& s2);
 };
 
 #endif

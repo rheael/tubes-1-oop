@@ -29,6 +29,7 @@ class Engimon{
         string getParent2Name();
         virtual string getParent1Species()=0;
         virtual string getParent2Species()=0;
+        virtual Element getElemen()=0;
         void setName(string);
         int getLevel();
         Skill* getSkill();
@@ -43,6 +44,7 @@ class Engimon{
         virtual void showData();
         virtual void talk()=0;
         virtual bool punyaElemen(string)=0;
+        virtual int nbEl()=0;
         bool punyaSkill(Skill);
 };
 

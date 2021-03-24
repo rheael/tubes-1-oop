@@ -39,4 +39,10 @@ Element Skill::getelemen() {
     return elemen;
 }
 
+bool operator==(Skill& s1, Skill& s2){
+    return(s1.getnama()==s2.getnama());
+}
 
+int Skill::getMasteryLevel(){
+    return this->mastery_level;
+}
