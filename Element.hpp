@@ -14,8 +14,8 @@ public:
     Element();
     Element(int, string[]);
     Element(const Element&);
+    Element& operator=(const Element&);
     ~Element();
-    // void printElemen();
     int getjmlel();
     void getidxel(int[]);
 };

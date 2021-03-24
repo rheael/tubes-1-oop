@@ -36,8 +36,9 @@ Engimon::Engimon(string nama, string napar1, string napar2){
     this->exp = 0;
     this->cumulativeExp = 0;
     this->numAbility = 0;
-
 }
+
+
 
 Engimon::Engimon(const Engimon& other){
     this->name = other.name;
@@ -177,6 +178,15 @@ bool Charmamon::punyaElemen(string elem){
     return (elem == "Fire");
 }
 
+Element Charmamon :: getElemen(){
+    return (elemen);
+}
+
+int Charmamon::nbEl(){
+    Element *a = new Element();
+    *a = elemen;
+    return((*a).getjmlel());
+}
 // -------DERIVED CLASS : WATER ENGIMONS ----------------
 string arr_water [] = {"Water"};
 Skill b("Torrent",10,1,1,arr_water);
@@ -197,6 +207,7 @@ Squirtlmon::Squirtlmon(string nama, string napar1, string napar2):Engimon(nama, 
     this->ability[0] = uniqueSkill;
 }
 
+
 string Squirtlmon::getParent1Species(){
     return parentSpecies;
 }
@@ -204,6 +215,7 @@ string Squirtlmon::getParent1Species(){
 string Squirtlmon::getParent2Species(){
     return parentSpecies;
 }
+
 
 void Squirtlmon::showData(){
     cout << "Name: " << this->name << endl;
@@ -217,8 +229,21 @@ void Squirtlmon::talk(){
     cout << "[" << this->name << "]: Squii!! Splash splash!!" << endl;
 }
 
+
+
 bool Squirtlmon::punyaElemen(string elem){
     return (elem == "Water");
+}
+
+
+int Squirtlmon::nbEl(){
+    Element *b = new Element();
+    *b = elemen;
+    return((*b).getjmlel());
+}
+
+Element Squirtlmon :: getElemen(){
+    return (this->elemen);
 }
 
 // -------DERIVED CLASS : ELECTRIC ENGIMONS ----------------
@@ -265,6 +290,16 @@ bool Pikamon::punyaElemen(string elem){
     return (elem == "Electric");
 }
 
+int Pikamon::nbEl(){
+    Element *b = new Element();
+    *b = elemen;
+    return((*b).getjmlel());
+}
+
+Element Pikamon :: getElemen(){
+    return (this->elemen);
+}
+
 // -------DERIVED CLASS : GROUND ENGIMONS ----------------
 string arr_ground [] = {"Ground"};
 Skill d("Sand Veil",10,1,1,arr_ground);
@@ -309,6 +344,16 @@ bool Rumblemon::punyaElemen(string elem){
     return (elem == "Ground");
 }
 
+int Rumblemon::nbEl(){
+    Element *b = new Element();
+    *b = elemen;
+    return((*b).getjmlel());
+}
+
+Element Rumblemon :: getElemen(){
+    return (this->elemen);
+}
+
 // -------DERIVED CLASS : ICE ENGIMONS ----------------
 string arr_ice [] = {"Ice"};
 Skill e("Ice body",10,1,1,arr_ice);
@@ -351,6 +396,16 @@ void Snommon::talk(){
 
 bool Snommon::punyaElemen(string elem){
     return (elem == "Ice");
+}
+
+int Snommon::nbEl(){
+    Element *b = new Element();
+    *b = elemen;
+    return((*b).getjmlel());
+}
+
+Element Snommon :: getElemen(){
+    return (this->elemen);
 }
 
 // -------DERIVED CLASS : ELECTROFIRE ENGIMONS ----------------
@@ -408,8 +463,18 @@ bool Rotomon::punyaElemen(string elem){
     return (elem == "Fire" || elem == "Electric");
 }
 
+int Rotomon::nbEl(){
+    Element *b = new Element();
+    *b = elemen;
+    return((*b).getjmlel());
+}
+
+Element Rotomon :: getElemen(){
+    return (this->elemen);
+}
+
 // -------DERIVED CLASS : ICE/WATER ENGIMONS ----------------
-string arr_icewater[] = {"Ice", "water"};
+string arr_icewater[] = {"Ice", "Water"};
 Skill g("Thick fat", 10, 1, 2, arr_icewater);
 Element icewater(2,arr_icewater);
 const Skill Sealmon::uniqueSkill = g;
@@ -461,6 +526,16 @@ void Sealmon::talk(){
 
 bool Sealmon::punyaElemen(string elem){
     return (elem == "Water" || elem == "Ice");
+}
+
+int Sealmon::nbEl(){
+    Element *b = new Element();
+    *b = elemen;
+    return((*b).getjmlel());
+}
+
+Element Sealmon :: getElemen(){
+    return (this->elemen);
 }
 
 // -------DERIVED CLASS : WATER/GROUND ENGIMONS ----------------
@@ -516,4 +591,66 @@ void Gastromon::talk(){
 
 bool Gastromon::punyaElemen(string elem){
     return (elem == "Water" || elem =="Ground");
+}
+
+int Gastromon::nbEl(){
+    Element *b = new Element();
+    *b = elemen;
+    return((*b).getjmlel());
+}
+
+Element Gastromon :: getElemen(){
+    return (this->elemen);
+}
+
+
+// Template isinya getAdv Battle
+template <class T1, class T2>
+float GetAdv(T1 user, T2 enemy){
+    float table[5][5];
+    table[0][0]=1;
+    table[0][1]=0;
+    table[0][2]=1;
+    table[0][3]=0.5;
+    table[0][4]=2;
+    table[1][0]=2;
+    table[1][1]=1;
+    table[1][2]=0;
+    table[1][3]=1;
+    table[1][4]=1;
+    table[2][0]=1;
+    table[2][1]=2;
+    table[2][2]=1;
+    table[2][3]=0;
+    table[2][4]=1,5;
+    table[3][0]=1.5;
+    table[3][1]=1;
+    table[3][2]=2;
+    table[3][3]=1;
+    table[3][4]=0;
+    table[4][0]=0;
+    table[4][1]=1;
+    table[4][2]=0.5;
+    table[4][3]=2;
+    table[4][4]=1;
+    int jmla = user.nbEl();
+    int arr[jmla];
+    Element eluser = user.getElemen();
+    eluser.getidxel(arr);
+    int jmlb = enemy.nbEl();
+    int arr2[jmlb];
+    Element elenem = enemy.getElemen();
+    elenem.getidxel(arr2);
+    float maks = 0;
+    for (int i = 0; i < jmla; i++)
+    {
+        for (int j = 0; j < jmlb; j++)
+        {
+            if(table[arr[i]][arr2[j]]>maks){
+                maks = table[arr[i]][arr2[j]];
+            }
+        }
+        
+    }
+    return maks;
 }

@@ -45,24 +45,40 @@ Element :: Element(int jmlel, string elem[]){
 }
 
 Element :: Element(const Element& el){
-    elmt = new int[4];
-    for (int i = 0; i < 4; i++)
+    jumlahel = el.jumlahel;
+    namael = new string[jumlahel];
+    for (int i = 0; i < jumlahel; i++)
+    {
+        this->namael[i] = el.namael[i];
+    }
+    elmt = new int[5];
+    for (int i = 0; i < 5; i++)
     {
         this->elmt[i] = el.elmt[i];
     }
 }
 
-Element :: ~Element(){
+Element& Element::operator=(const Element& el){
+    delete[] namael;
     delete[] elmt;
+    this->jumlahel = el.jumlahel;
+    namael = new string[jumlahel];
+    elmt = new int[5];
+    for (int i = 0; i < jumlahel; i++)
+    {
+        namael[i]=el.namael[i];
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        elmt[i]=el.elmt[i];
+    }
+    return *this;
 }
 
-// void Element::printElemen(){
-//     for (int i = 0; i < jumlahel; i++)
-//     {
-//         cout << namael[i];
-//     }
-    
-// }
+Element :: ~Element(){
+    delete[] elmt;
+    delete[] namael;
+}
 
 int Element::getjmlel(){
     return jumlahel;

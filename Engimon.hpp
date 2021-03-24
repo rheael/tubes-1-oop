@@ -21,6 +21,7 @@ class Engimon{
         Engimon(string nama);
         Engimon(string nama, string napar1, string napar2);
         Engimon(const Engimon&);
+        Engimon(Element el);
         virtual ~Engimon();
         // getter, setter
         string getName();
@@ -55,6 +56,7 @@ class Charmamon: public Engimon{
         //Charmamon(const Engimon&);
         //~Charmamon();
         //getter, setter
+        Element getElemen();
         Skill getuniqueSkill();
         string getParent1Species();
         string getParent2Species();
@@ -62,6 +64,7 @@ class Charmamon: public Engimon{
         void showData();
         void talk();
         bool punyaElemen(string);
+        int nbEl();
 };
 
 class Squirtlmon: public Engimon{
@@ -77,6 +80,7 @@ class Squirtlmon: public Engimon{
         //Squirtlmon(const Engimon&);
         //~Squirtlmon();
         //getter, setter
+        Element getElemen();
         Skill getuniqueSkill();
         string getParent1Species();
         string getParent2Species();
@@ -84,6 +88,7 @@ class Squirtlmon: public Engimon{
         void showData();
         void talk();
         bool punyaElemen(string);
+        int nbEl();
 };
 
 class Pikamon: public Engimon{
@@ -99,6 +104,7 @@ class Pikamon: public Engimon{
         //Pikamon(const Engimon&);
         //~Pikamon();
         //getter, setter
+        Element getElemen();
         Skill getuniqueSkill();
         string getParent1Species();
         string getParent2Species();
@@ -106,6 +112,7 @@ class Pikamon: public Engimon{
         void showData();
         void talk();
         bool punyaElemen(string);
+        int nbEl();
 };
 
 class Rumblemon: public Engimon{
@@ -118,9 +125,11 @@ class Rumblemon: public Engimon{
         Rumblemon();
         Rumblemon(string nama);
         Rumblemon(string nama, string napar1, string napar2);
+        int getElem();
         //Rumblemon(const Engimon&);
         //~Rumblemon();
         //getter, setter
+        Element getElemen();
         Skill getuniqueSkill();
         string getParent1Species();
         string getParent2Species();
@@ -128,6 +137,7 @@ class Rumblemon: public Engimon{
         void showData();
         void talk();
         bool punyaElemen(string);
+        int nbEl();
 };
 
 class Snommon: public Engimon{
@@ -140,9 +150,11 @@ class Snommon: public Engimon{
         Snommon();
         Snommon(string nama);
         Snommon(string nama, string napar1, string napar2);
+        int getElem();
         //Snommon(const Engimon&);
         //~Snommon();
         //getter, setter
+        Element getElemen();
         Skill getuniqueSkill();
         string getParent1Species();
         string getParent2Species();
@@ -150,6 +162,7 @@ class Snommon: public Engimon{
         void showData();
         void talk();
         bool punyaElemen(string);
+        int nbEl();
 };
 
 class Rotomon: public Engimon{
@@ -167,6 +180,7 @@ class Rotomon: public Engimon{
         //Rotomon(const Engimon&);
         //~Rotomon();
         //getter, setter
+        Element getElemen();
         Skill getuniqueSkill();
         string getParent1Species();
         string getParent2Species();
@@ -174,6 +188,7 @@ class Rotomon: public Engimon{
         void showData();
         void talk();
         bool punyaElemen(string);
+        int nbEl();
 };
 
 class Sealmon: public Engimon{
@@ -191,6 +206,7 @@ class Sealmon: public Engimon{
         //Sealmon(const Engimon&);
         //~Sealmon();
         //getter, setter
+        Element getElemen();
         Skill getuniqueSkill();
         string getParent1Species();
         string getParent2Species();
@@ -198,6 +214,7 @@ class Sealmon: public Engimon{
         void showData();
         void talk();
         bool punyaElemen(string);
+        int nbEl();
 };
 
 class Gastromon: public Engimon{
@@ -215,6 +232,7 @@ class Gastromon: public Engimon{
         //Gastromon(const Engimon&);
         //~Gastromon();
         //getter, setter
+        Element getElemen();
         Skill getuniqueSkill();
         string getParent1Species();
         string getParent2Species();
@@ -222,4 +240,5 @@ class Gastromon: public Engimon{
         void showData();
         void talk();
         bool punyaElemen(string);
+        int nbEl();
 };
