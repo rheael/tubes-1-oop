@@ -96,7 +96,7 @@ void Player::learnSkill(Engimon *E, Skill S) {
     // Kalo gak ada, skill engimon bertambah
 }
 
-void Player::battle(Engimon& musuh){
+void Player::battle(Engimon* musuh){
     // Bandingkan power musuh dan power engimon player
             
     // POWER :
@@ -112,15 +112,15 @@ void Player::battle(Engimon& musuh){
    // mungkin bikin fungsi sum(base power * mastery lv)
    // print ascii keterangan menang/kalah
 
-    Engimon& currentEngimon = this.getActiveEngimon();
+    Engimon* currentEngimon = getActiveEngimon();
     // find element advantage
     // int myElmAdvantage = ...
     // int enmElmAdvantage = ...
 
-    int myPower = currentEngimon.getLevel() * myElmAdvantage +
+    int myPower = currentEngimon->getLevel() * myElmAdvantage +
                 sumBasePowMastery(currentEngimon);
 
-    int enemyPower = musuh.getLevel() * enmElmAdvantage +
+    int enemyPower = musuh->getLevel() * enmElmAdvantage +
                 sumBasePowMastery(musuh);
 
     if(myPower>enemyPower){
@@ -128,7 +128,7 @@ void Player::battle(Engimon& musuh){
 
         // active engimon menerima exp
         // asumsi besarannya 35
-        currentEngimon.addExp(35);
+        currentEngimon->addExp(35);
         
         // mendapatkan engimon lawan
         InventoryEngimon.addEngimon(musuh);
@@ -144,7 +144,7 @@ void Player::battle(Engimon& musuh){
         // print ascii lose message
         
         // engimon akan mati
-        currentEngimon.die();
+        currentEngimon->die();
 
         // player bs pilih command kek biasa
     }
@@ -155,7 +155,7 @@ void Player::battle(Engimon& musuh){
 
 }
 
-int Player::sumBasePowMastery(Engimon& E){
+int Player::sumBasePowMastery(Engimon* E){
     int sum = 0;
     /*
     // iterate through all engimon's skill (butuh skill)
@@ -166,7 +166,7 @@ int Player::sumBasePowMastery(Engimon& E){
     return sum;
 }
 
-void breeding(Engimon& bapak, Engimon& emak){
+void Player::breeding(Engimon& bapak, Engimon& emak){
     // cek level bapak emak
     bool cukupumur = false;
     if(bapak.getLevel() >= 30 && emak.getLevel()>=30){
@@ -176,8 +176,8 @@ void breeding(Engimon& bapak, Engimon& emak){
     if(cukupumur){ // sudah boleh kawin
         // level parent berkurang 30
         // mungkin nanti di kelas engimon bisa dibikin method level down
-        // bapak.levelDown(30);
-        // emak.levelDown(30);
+        bapak.levelDown(30);
+        emak.levelDown(30);
 
         // memberikan nama anak
         string namaAnak;
@@ -192,4 +192,8 @@ void breeding(Engimon& bapak, Engimon& emak){
 
         // inherit skill
     }
+}
+
+void Player::decideChildElm(Engimon& bapak, Engimon& emak){
+
 }

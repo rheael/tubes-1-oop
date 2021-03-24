@@ -34,9 +34,10 @@ class Player {
         void displayInventorySkill();
         void displayInventoryEngimon();
         void learnSkill(Engimon* E, Skill S);
-        void battle(Engimon& musuh);
-        int sumBasePowMastery(Engimon&);
+        void battle(Engimon* musuh);
+        int sumBasePowMastery(Engimon*);
         void breeding(Engimon& bapak, Engimon& emak);
+        void decideChildElm(Engimon& bapak, Engimon& emak);
 };
 
 #endif
