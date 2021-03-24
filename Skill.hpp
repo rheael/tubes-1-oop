@@ -3,7 +3,7 @@
 using namespace std;
 #include <string>
 #include <iostream>
-#include "Element.cpp"
+#include "Element.hpp"
 
 class Skill{
 private:
@@ -19,6 +19,7 @@ public:
     ~Skill();
     int countSkillPower();
     string getnama();
+    Element getelemen();
 };
 
 #endif

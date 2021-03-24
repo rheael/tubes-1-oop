@@ -97,3 +97,7 @@ void Element::getidxel(int arr[]){
     }
     
 }
+
+string Element::getNameAtIdx(int idx) {
+    return namael[idx];
+}

@@ -18,6 +18,7 @@ public:
     ~Element();
     int getjmlel();
     void getidxel(int[]);
+    string getNameAtIdx(int idx);
 };
 
 #endif

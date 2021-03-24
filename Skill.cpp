@@ -35,4 +35,8 @@ int Skill::countSkillPower(){
     return (num_base_power*mastery_level);
 }
 
+Element Skill::getelemen() {
+    return elemen;
+}
+
 

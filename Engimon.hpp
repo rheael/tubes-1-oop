@@ -1,4 +1,4 @@
-#include "Skill.cpp"  // ini butuh kelas skill :D
+#include "Skill.hpp"  // ini butuh kelas skill :D
 #include <iostream>
 #include <string>
 using namespace std;
@@ -27,16 +27,15 @@ class Engimon{
         string getName();
         string getParent1Name();
         string getParent2Name();
-        int getLevel();
         virtual string getParent1Species()=0;
         virtual string getParent2Species()=0;
         void setName(string);
+        int getLevel();
         //method overloading
         Engimon& operator=(const Engimon&);
         Engimon& operator<<(const Skill&);
         // method lainnya
         void levelUp();
-        void levelDown(int);
         void addExp(int);
         void die(); // --------------------ini apakah iya?
         virtual void showData();

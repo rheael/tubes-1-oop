@@ -77,8 +77,8 @@ string Engimon::getParent2Name(){
     return this->parent2name;
 }
 
-int Engimon::getLevel(){
-    return this->level;
+int Engimon::getLevel() {
+    return level;
 }
 
 //string Engimon::getParent1Species(){};
@@ -95,10 +95,6 @@ void Engimon::levelUp(){
         this->level++;
         this->exp = this->exp - 100;
     }
-}
-
-void Engimon::levelDown(int n){
-    this->level = this->level - n;
 }
 
 void Engimon::addExp(int tambahan){
