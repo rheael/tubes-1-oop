@@ -144,6 +144,21 @@ bool Engimon::punyaSkill(Skill s){
     return found;
 }
 
+Skill* Engimon::getAbility(){
+    return this->ability;
+}
+
+bool Engimon::isSkillFull(){
+    bool full = true;
+    for(int i=0;i>4;i++){
+        if(this->ability[i].getnama()=="XXX"){
+            full = false;
+            break;
+        }
+    }
+    return full;
+}
+
 // -------DERIVED CLASS : FIRE ENGIMONS ----------------
 string arr_fire [] = {"Fire"};
 Skill a("Blaze",10,1,1,arr_fire);

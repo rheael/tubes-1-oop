@@ -101,3 +101,18 @@ void Element::getidxel(int arr[]){
 string Element::getNameAtIdx(int idx) {
     return namael[idx];
 }
+
+bool operator==(Element& e1, Element& e2){
+    bool sama = true;
+    if(e1.getjmlel()==e2.getjmlel()){
+        int n = e1.getjmlel();
+        for(int i=0;i<n;i++){
+            // cari yang ga sama
+            if(e1.getNameAtIdx(i)!=e2.getNameAtIdx(i)){
+                sama = false;
+                break;
+            }
+        }
+    }
+    return sama;
+}

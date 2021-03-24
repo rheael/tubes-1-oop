@@ -20,7 +20,12 @@ public:
     int countSkillPower();
     string getnama();
     Element getelemen();
+    Skill& operator=(const Skill&);
     friend bool operator==(Skill& s1, Skill& s2);
+    int getMasteryLevel();
+    int getNumBasePower();
+    void setMasteryLevel(int n);
+    void incrementMasteryLevel();
 };
 
 #endif
