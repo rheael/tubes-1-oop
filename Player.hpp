@@ -31,6 +31,8 @@ class Player {
         Engimon* getActiveEngimon();
         void changeActiveEngimon(Engimon* newActiveEngimon);
         void interactActiveEngimon();
+        void addSkillToInventory(Skill* S);
+        void addEngimonToInventory(Engimon* E);
         void displayInventorySkill();
         void displayInventoryEngimon();
         void learnSkill(Engimon* E, Skill S);

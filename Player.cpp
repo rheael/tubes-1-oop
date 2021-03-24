@@ -1,34 +1,31 @@
 #include "Player.hpp"
 
 Player::Player() {
-    //Set posisi awal
+    //Inisialisasi awal
+    MAX_CAP = 10; // Ini disetnya ngasal
     Position = new Point();
     InventorySkill = new Inventory<Skill*>();
     InventoryEngimon = new Inventory<Engimon*>();
 
     //Inisialisasi inventory skill
-    string *arr = new string[1];
-    arr[0] = "Water";
-    Skill *S1 = new Skill("Skill1",20,4,1,arr);
-    InventoryItem<Skill*> *IS = new InventoryItem<Skill*>(S1, 1);
-    InventorySkill->addItem(IS);
+    string *prereqElmt = new string[1];
+    prereqElmt[0] = "Water";
+    Skill *S1 = new Skill("Skill1",20,4,1,prereqElmt);
+    addSkillToInventory(S1);
 
-    //Inisialisasi engimon
-    Charmamon *C = new Charmamon();
-    InventoryItem<Engimon*> *CI = new InventoryItem<Engimon*>(C, 1);
-    Pikamon *P = new Pikamon();
-    InventoryItem<Engimon*> *PI = new InventoryItem<Engimon*>(P, 1);
-    Rotomon *R = new Rotomon();
-    InventoryItem<Engimon*> *RI = new InventoryItem<Engimon*>(R, 1);
-    InventoryEngimon->addItem(CI);
-    InventoryEngimon->addItem(PI);
-    InventoryEngimon->addItem(RI);
+    //Inisialisasi inventory engimon
+    Charmamon *C = new Charmamon("Charmamon");
+    Pikamon *P = new Pikamon("Pikamon");
+    Rotomon *R = new Rotomon("Rotomon");
+    addEngimonToInventory(C);
+    addEngimonToInventory(P);
+    addEngimonToInventory(R);
+    addEngimonToInventory(R);
 
     //Pilih activeEngimon pertama
-    activeEngimon = InventoryEngimon->getItemAtIdx(0)->getItem();
+    activeEngimon = InventoryEngimon->getItemAtIdx(0).getItem(); // Kalo inisialisasi, pilih pertama aja
 
     nbInventory = InventorySkill->getNbElmt() + InventoryEngimon->getNbElmt();
-    MAX_CAP = 20; // Ini disetnya ngasal
 }
 
 void Player::keAtas() {
@@ -65,6 +62,11 @@ void Player::keKiri() {
 
 Point* Player::getPosition() {return Position;}
 
+void Player::setPosition(int X, int Y) {
+    Position->setX(X);
+    Position->setY(Y);
+}
+
 Engimon* Player::getActiveEngimon() {return activeEngimon;}
 
 void Player::changeActiveEngimon(Engimon* newActiveEngimon) {
@@ -75,26 +77,51 @@ void Player::interactActiveEngimon() {
     // cout << activeEngimon.getJargon() << endl; 
 }
 
+void Player::addSkillToInventory(Skill* S) {
+    if (nbInventory == MAX_CAP) {
+        cout << "Inventory Anda sudah penuh!\n";
+    } else {
+        InventorySkill->addItem(S);
+        nbInventory++;
+    }
+}
+
+void Player::addEngimonToInventory(Engimon* E) {
+    if (nbInventory == MAX_CAP) {
+        cout << "Inventory Anda sudah penuh!\n";
+    } else {
+        InventoryEngimon->addItem(E);
+        nbInventory++;
+    }
+}
+
 void Player::displayInventorySkill() {
     cout << "Skill yang ada di dalam inventory:\n";
     for (int i=0; i<InventorySkill->getNbElmt(); i++) {
-        cout << InventorySkill->getItemAtIdx(i)->getItem()->getnama() << " (" << InventorySkill->getItemAtIdx(i)->getItem()->getnama() << ")\n";
+        cout << InventorySkill->getItemAtIdx(i).getItem()->getnama() << " (" << InventorySkill->getItemAtIdx(i).getNbItem() << ")\n";
     }
 }
 
 void Player::displayInventoryEngimon() {
     cout << "Engimon yang ada di dalam inventory:\n";
     for (int i=0; i<InventoryEngimon->getNbElmt(); i++) {
-        cout << InventoryEngimon->getItemAtIdx(i)->getItem()->getName() << " (" << InventoryEngimon->getItemAtIdx(i)->getItem()->getName() << ")\n";
+        cout << InventoryEngimon->getItemAtIdx(i).getItem()->getName() << " (" << InventoryEngimon->getItemAtIdx(i).getNbItem() << ")\n";
     }
 }
 
 void Player::learnSkill(Engimon *E, Skill S) {
-    // Cek apakah skill engimon udah 4
     // Cek apakah elemen engimon tersebut ada di prereq learn skill tsb
     // Kalo ada, skill engimon tidak bertambah, ngasih pesan "kamu udah punya skill ini"
     // Kalo gak ada, skill engimon bertambah
+    if (E->punyaSkill(S)) {
+        cout << E->getName() << " sudah memiliki skill " << S.getnama() << endl;
+    } else {
+        //Cek apakah prereq elemennya sesuai dengan engimon, kl ga sesuai print "Gasesuai"
+        //Cek apakah udh punya 4, kl penuh print "Engimon ini sudah memiliki 4 skill"
+        //Kalo belum 4, skill engimon bertambah
+    }
 }
+
 
 void Player::battle(Engimon* musuh){
     // Bandingkan power musuh dan power engimon player
@@ -131,7 +158,7 @@ void Player::battle(Engimon* musuh){
         currentEngimon->addExp(35);
         
         // mendapatkan engimon lawan
-        InventoryEngimon.addEngimon(musuh);
+        InventoryEngimon->addItem(musuh);
 
         // mendapatkan random skill kompatibel dengan elemen musuh
         // mungkin dibikin generateRandomSkill based on engimon's element
