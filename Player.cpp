@@ -114,8 +114,8 @@ void Player::battle(Engimon* musuh){
 
     Engimon* currentEngimon = getActiveEngimon();
     // find element advantage
-    // int myElmAdvantage = ...
-    // int enmElmAdvantage = ...
+    float myElmAdvantage = GetAdv(currentEngimon,musuh);
+    float enmElmAdvantage = GetAdv(musuh,currentEngimon);
 
     int myPower = currentEngimon->getLevel() * myElmAdvantage +
                 sumBasePowMastery(currentEngimon);
@@ -157,12 +157,11 @@ void Player::battle(Engimon* musuh){
 
 int Player::sumBasePowMastery(Engimon* E){
     int sum = 0;
-    /*
     // iterate through all engimon's skill (butuh skill)
     for(int i=0; i<4;i++){ // max elm 4
-        sum = sum + E.getSkill()[i].getNilaiNumerik() * 
-        E.getSkill()[i].getMasteryLevel();
-    }*/
+        sum = sum + E->getSkill()[i].countSkillPower() * 
+        E->getSkill()[i].countSkillPower();
+    }
     return sum;
 }
 
@@ -195,5 +194,13 @@ void Player::breeding(Engimon& bapak, Engimon& emak){
 }
 
 void Player::decideChildElm(Engimon& bapak, Engimon& emak){
+    // belom nyoba work ato ngga
+    string typeBapak = typeid(Engimon).name();
+    string typeEmak = typeid(Engimon).name();
 
+    // kasus i : elemen kedua parent sama
+    // spesies anak dipilih dari parent A atau B (pilih parent A)
+    if(typeBapak==typeEmak){
+        // gimana cara akses elementnya ya wkwk
+    }
 }
