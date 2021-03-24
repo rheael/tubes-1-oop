@@ -97,6 +97,12 @@ void Engimon::levelUp(){
     }
 }
 
+void Engimon::levelDown(int n){
+    if(this->level>=n){
+        this->level = this->level - n;
+    }
+}
+
 void Engimon::addExp(int tambahan){
     this->exp = this->exp+tambahan;
     this->cumulativeExp = this->cumulativeExp+tambahan;

@@ -36,6 +36,7 @@ class Engimon{
         Engimon& operator<<(const Skill&);
         // method lainnya
         void levelUp();
+        void levelDown(int);
         void addExp(int);
         void die(); // --------------------ini apakah iya?
         virtual void showData();
