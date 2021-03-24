@@ -3,8 +3,7 @@
 #ifndef _MAP_HPP
 #define _MAP_HPP
 #include "Point.hpp"
-// #include "Engimon.hpp"
-// #include "Skill.hpp"
+#include "Engimon.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -16,6 +15,7 @@ class Map {
     private:
         const static int row=9;
         const static int column=12;
+        // const static int limitSpawn user-defined;
         Point** map;
         /*char* filename;*/
     public:
@@ -30,6 +30,8 @@ class Map {
         void getMove(string,char);
         Point getPosition(char);
         bool isAuthorized(char, int, int);
+        void randomizeWildEngimonMove(char);
+        void isWildAuthorized();
 };
 
 #endif

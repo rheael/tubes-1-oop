@@ -1,6 +1,4 @@
 #include "Map.hpp"
-#include "Point.hpp"
-// #include "Engimon.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -49,6 +47,10 @@ void Map::displayMap() {
     }
 }
 
+// when engimon levels up, maybe just check whether it has gone to a level
+// where it can be capitalized or not
+// and then setChara with capitalized type of the engi
+
 void Map::setMapCharaAt(int x, int y, char chara) {
     map[y][x].setChara(chara);
 }
@@ -62,27 +64,32 @@ char Map::getMapTypeAt(int x,int y) {
 }
 
 void Map::spawnWildEngimon() {
-    // handle max spawned engimon, user?
-    /*int i=rand();
+    // User will input max spawned Engimon, probably on main
+    int i=rand();
     int j=rand();
     // randomize the x and y first, if it is modulo something then spawn
     // after that, the tile used will be (i%12 and j%9) 
-    // know the tile,
-    if((i+j)%7) {
+    if((i+j)%7==0) {
         int newX=i%12;
         int newY=j%9;
-        bool engimonSpawned = false;
-        if(i%2==0) {
-            if(map[newX][newY].getType()=='-') { // also the type of tile
-                Engimon* wildEngi= new Charmamon("Wildcharm"); // w/ parameters?
-                setMapCharaAt(newX, newY, 'f');
+        if(!map[newY][newX].isOccupied()) {
+            if(map[newY][newX].getType()=='-') { // the type of tile
+                if(isAuthorized('f',newX,newY)) {
+                    Charmamon* wildEngi= new Charmamon("Wildcharm");
+                    cout << "There comes charmamon!" << endl; 
+                    setMapCharaAt(newX, newY, 'f');
+                }
             }
             else {
-                Engimon* wildEngi = new Snommon("Wildsnom"); // w/ parameters
-                setMapCharaAt(newX, newY, 'i');
+                if(isAuthorized('i',newX,newY)) {
+                    Snommon* wildEngi = new Snommon("Wildsnom"); 
+                    cout << "There comes snommon!" << endl;
+                    setMapCharaAt(newX, newY, 'i');
+                }
             }
         }
-    }*/
+    }
+
 }
 
 void Map::getMove(string move, char chara) {
@@ -108,7 +115,7 @@ void Map::getMove(string move, char chara) {
         newX=x+1;
         newY=y;
     }
-    if(isAuthorized(chara,newX,newY)) {
+    if(isAuthorized(chara,newX,newY) && (!map[newY][newX].isOccupied())) {
         setMapCharaAt(newX,newY,chara);
         setMapCharaAt(x,y,' ');
     }
@@ -133,13 +140,22 @@ Point Map::getPosition(char chara) {
 }
 
 bool Map::isAuthorized(char chara, int col, int ro) {
-    /* determine whether the char can access the map or not */
-    /* later for engimon */
-    return(col>=0 && col<column && ro>=0 && ro<row);
-    // compatible tile with engimons
+    return (col>=0 && col<column && ro>=0 && ro<row);
+}
+
+// throw exception(?) if wildengi and player goes to the same tile
+// dunno if its handled on the driver or here
+void Map::randomizeWildEngimonMove(char chara) {
+
+}
+
+// if the wild engi is fire, ground, electric : only on grassland
+// if the wild engi is water / ice : only on sea
+void Map::isWildAuthorized() {
+
 }
 
 /* 
-g++ map.cpp point.cpp driver_map.cpp -o drivermap1
+g++ map.cpp point.cpp driver_map.cpp engimon.cpp element.cpp skill.cpp -o drivermap1
 ./drivermap1 
 */

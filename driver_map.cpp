@@ -13,6 +13,7 @@ int main() {
         // to make player move {
         try {
             (m.getMove(input,'P'));
+            m.spawnWildEngimon();
         } 
         catch (int x) {
             cout << "Invalid move!\n";
