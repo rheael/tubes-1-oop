@@ -27,6 +27,7 @@ class Engimon{
         string getName();
         string getParent1Name();
         string getParent2Name();
+        int getLevel();
         virtual string getParent1Species()=0;
         virtual string getParent2Species()=0;
         void setName(string);
@@ -35,6 +36,7 @@ class Engimon{
         Engimon& operator<<(const Skill&);
         // method lainnya
         void levelUp();
+        void levelDown(int);
         void addExp(int);
         void die(); // --------------------ini apakah iya?
         virtual void showData();
