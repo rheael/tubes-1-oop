@@ -4,6 +4,7 @@
 #define _POINT_HPP_
 
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -44,9 +45,9 @@ public:
     bool isSea(); // Mengembalikan true jika tile berjenis Sea
     bool isHighLevel(); // Mengembalikan true jika Engimon yang menempati tile berlevel tinggi
     bool isLowLevel(); // Mengembalikan true jika Engimon yang menempati tile berlevel rendah
-    bool isGrassEngimon(char t); // Mengembalikan true jika Engimon yang menempati tile merupakan Grass Engimon
-    bool isSeaEngimon(char t); // Mengembalikan true jika Engimon yang menempati tile merupakan Sea Engimon
-    bool isBothEngimon(char t); // Mengembalikan true jika Engimon yang menempati tile merupakan Water/Ground Engimon
+    bool isGrassEngimon(); // Mengembalikan true jika Engimon yang menempati tile merupakan Grass Engimon
+    bool isSeaEngimon(); // Mengembalikan true jika Engimon yang menempati tile merupakan Sea Engimon
+    bool isBothEngimon(); // Mengembalikan true jika Engimon yang menempati tile merupakan Water/Ground Engimon
 };
 
 #endif

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cctype>
+#include <cstring>
 #include "Point.hpp"
 
 using namespace std;
@@ -32,11 +33,11 @@ Point::Point(int x, int y, char t) {
         this->chara = t;
     }
     // Asumsi dia di Grassland pertama kali
-    else if (isBothEngimon(t) || isGrassEngimon(t)) {
+    else if (isBothEngimon() || isGrassEngimon()) {
         this->type = '-';
         this->chara = t;
     }
-    else if (isSeaEngimon(t)) {
+    else if (isSeaEngimon()) {
         this->type = 'o';
         this->chara = t;
     }
@@ -108,6 +109,7 @@ bool Point::isMember(const char arr[], char t, int size) {
         if (arr[i] == t) {
             found = true;
         }
+        i++;
     }
     return found;
 }
@@ -132,14 +134,14 @@ bool Point::isLowLevel() {
     return isMember(low,this->chara,9);
 }
 
-bool Point::isGrassEngimon(char t) {
-    return isMember(grass,toupper(t),5);
+bool Point::isGrassEngimon() {
+    return isMember(grass,toupper(this->chara),5);
 }
 
-bool Point::isSeaEngimon(char t) {
-    return isMember(sea,toupper(t),3);
+bool Point::isSeaEngimon() {
+    return isMember(sea,toupper(this->chara),3);
 }
 
-bool Point::isBothEngimon(char t) {
-    return isGrassEngimon(t) && isSeaEngimon(t);
+bool Point::isBothEngimon() {
+    return isGrassEngimon() && isSeaEngimon();
 }
