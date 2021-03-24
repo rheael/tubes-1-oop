@@ -26,11 +26,12 @@ class Engimon{
         string getName();
         string getParent1Name();
         string getParent2Name();
-        virtual string getParent1Species()=0;
-        virtual string getParent2Species()=0;
-        virtual Element getElemen()=0;
+        virtual string getParent1Species();
+        virtual string getParent2Species();
+        virtual Element getElemen();
         void setName(string);
         int getLevel();
+        Skill* getAbility();
         Skill* getSkill();
         //method overloading
         Engimon& operator=(const Engimon&);
@@ -41,11 +42,12 @@ class Engimon{
         void addExp(int);
         void die(); // --------------------ini apakah iya?
         virtual void showData();
-        virtual void talk()=0;
-        virtual bool punyaElemen(string)=0;
-        virtual int nbEl()=0;
+        virtual void talk();
+        virtual bool punyaElemen(string);
+        virtual int nbEl();
         bool punyaSkill(Skill);
         void addNewSkill(Skill);
+        bool isSkillFull();
 };
 
 class Charmamon: public Engimon{
@@ -251,6 +253,55 @@ class Gastromon: public Engimon{
 // Template isinya getAdv Battle
 template <class T1, class T2>
 float GetAdv(T1 user, T2 enemy){
+    float table[5][5];
+    table[0][0]=1;
+    table[0][1]=0;
+    table[0][2]=1;
+    table[0][3]=0.5;
+    table[0][4]=2;
+    table[1][0]=2;
+    table[1][1]=1;
+    table[1][2]=0;
+    table[1][3]=1;
+    table[1][4]=1;
+    table[2][0]=1;
+    table[2][1]=2;
+    table[2][2]=1;
+    table[2][3]=0;
+    table[2][4]=1,5;
+    table[3][0]=1.5;
+    table[3][1]=1;
+    table[3][2]=2;
+    table[3][3]=1;
+    table[3][4]=0;
+    table[4][0]=0;
+    table[4][1]=1;
+    table[4][2]=0.5;
+    table[4][3]=2;
+    table[4][4]=1;
+    int jmla = user->nbEl();
+    int arr[jmla];
+    Element eluser = user->getElemen();
+    eluser.getidxel(arr);
+    int jmlb = enemy->nbEl();
+    int arr2[jmlb];
+    Element elenem = enemy->getElemen();
+    elenem.getidxel(arr2);
+    float maks = 0;
+    for (int i = 0; i < jmla; i++)
+    {
+        for (int j = 0; j < jmlb; j++)
+        {
+            if(table[arr[i]][arr2[j]]>maks){
+                maks = table[arr[i]][arr2[j]];
+            }
+        }
+        
+    }
+    return maks;
+}
+
+float GetAdv(Engimon user, Engimon enemy){
     float table[5][5];
     table[0][0]=1;
     table[0][1]=0;

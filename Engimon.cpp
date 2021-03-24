@@ -147,6 +147,21 @@ bool Engimon::punyaSkill(Skill s){
     return found;
 }
 
+Skill* Engimon::getAbility(){
+    return this->ability;
+}
+
+bool Engimon::isSkillFull(){
+    bool full = true;
+    for(int i=0;i>4;i++){
+        if(this->ability[i].getnama()=="XXX"){
+            full = false;
+            break;
+        }
+    }
+    return full;
+}
+
 void Engimon::addNewSkill(Skill S) {
     if (numAbility == 4) {
         cout << getName() << " sudah memiliki 4 skill\n";

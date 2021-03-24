@@ -19,10 +19,13 @@ int main() {
     cout << "Aktif Engimon: " << P->getActiveEngimon()->getName() << endl;
 
     // TEST 4
+    string *prereqElmt = new string[1];
+    prereqElmt[0] = "Ground";
+    Skill *S2 = new Skill("Skill2",20,4,1,prereqElmt);
     Squirtlmon *Sq = new Squirtlmon("Squirtlmon");
     P->addEngimonToInventory(Sq);
-    P->learnSkill(Sq);
-    P->learnSkill(G);
+    P->learnSkill(Sq,S2);
+    P->learnSkill(G,S2);
     G->showData();
 
     // TEST 5

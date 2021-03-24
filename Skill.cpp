@@ -46,3 +46,24 @@ bool operator==(Skill& s1, Skill& s2){
 int Skill::getMasteryLevel(){
     return this->mastery_level;
 }
+
+int Skill::getNumBasePower(){
+    return this->num_base_power;
+}
+
+Skill& Skill::operator=(const Skill& s){
+    this->nama = s.nama;
+    this->num_base_power = s.num_base_power;
+    this->mastery_level = s.mastery_level;
+    this->elemen = s.elemen;
+
+    return *this;
+}
+
+void Skill::setMasteryLevel(int n){
+    this->mastery_level = n;
+}
+
+void Skill::incrementMasteryLevel(){
+    this->mastery_level = this->mastery_level++;
+}

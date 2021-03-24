@@ -38,7 +38,7 @@ void Player::keAtas() {
 }
 
 void Player::keBawah() {
-    if (getPosition()->getY()+1 == 12) { //Pokoknya nabrak bawah
+    if (getPosition()->getY()+1 == 12) { //Pokoknya nabrak atas
         throw "Kamu menabrak tembok bawah!";
     } else {
         setPosition(getPosition()->getX(), getPosition()->getY()+1);
@@ -54,7 +54,7 @@ void Player::keKanan() {
 }
 
 void Player::keKiri() {
-    if (getPosition()->getX()-1 == -1) { //Pokoknya nabrak atas
+    if (getPosition()->getX()-1 == -1) { //Pokoknya nabrak kiri
         throw "Kamu menabrak tembok kiri!";
     } else {
         setPosition(getPosition()->getX()-1, getPosition()->getY());
@@ -122,16 +122,10 @@ void Player::displayInventoryEngimon() {
     }
 }
 
-void Player::learnSkill(Engimon *E) {
-    displayInventorySkill();
-    cout << E->getName() << " mau learn skill berapa nih? ";
-    int idx;
-    cin >> idx;
-
+void Player::learnSkill(Engimon *E, Skill *S) {
     // Cek apakah elemen engimon tersebut ada di prereq learn skill tsb
     // Kalo ada, skill engimon tidak bertambah, ngasih pesan "kamu udah punya skill ini"
     // Kalo gak ada, skill engimon bertambah
-    Skill* S = InventorySkill->getItemAtIdx(idx-1).getItem();
     Skill* tempS;
     Skill valueS;
     tempS = S;
@@ -264,6 +258,7 @@ Engimon& Player::breedingSpesies(Engimon& bapak, Engimon& emak){
             << " : ";
         cin >> namaAnak;
 
+        Engimon* child1 = new Engimon();
         // construct engimon baru (mesti nentuin elmnya dulu)
         // kasus i : elemen kedua parent sama
         // spesies & elm anak dipilih dari parent A atau B (pilih parent A)
@@ -272,27 +267,35 @@ Engimon& Player::breedingSpesies(Engimon& bapak, Engimon& emak){
             if (typeBapak.find(Char) != std::string::npos){
                 // tipe charmamon
                 Charmamon child(namaAnak, bapak.getName(), emak.getName());
+                *child1 = child;
             } else if(typeBapak.find(Squirt) != std::string::npos){
                 // tipe squirtmon
                 Squirtlmon child(namaAnak, bapak.getName(), emak.getName());
+                *child1 = child;
             } else if(typeBapak.find(Pika) != std::string::npos){
                 // tipe pikamon
                 Pikamon child(namaAnak, bapak.getName(), emak.getName());
+                *child1 = child;
             } else if(typeBapak.find(Rumble) != std::string::npos){
                 // tipe rumblemon
                 Rumblemon child(namaAnak, bapak.getName(), emak.getName());
+                *child1 = child;
             } else if(typeBapak.find(Sno) != std::string::npos){
                 // tipe snommon
                 Snommon child(namaAnak, bapak.getName(), emak.getName());
+                *child1 = child;
             } else if(typeBapak.find(Roto) != std::string::npos){
                 // tipe rotomon
                 Rotomon child(namaAnak, bapak.getName(), emak.getName());
+                *child1 = child;
             } else if(typeBapak.find(Seal) != std::string::npos){
                 // tipe sealmon
                 Sealmon child(namaAnak, bapak.getName(), emak.getName());
+                *child1 = child;
             } else if(typeBapak.find(Gastro) != std::string::npos){
                 // tipe gastromon
                 Gastromon child(namaAnak, bapak.getName(), emak.getName());
+                *child1 = child;
             }
         }
         // kasus ii & iii : elemen kedua parent berbeda maka 
@@ -308,54 +311,70 @@ Engimon& Player::breedingSpesies(Engimon& bapak, Engimon& emak){
                 if (typeBapak.find(Char) != std::string::npos){
                     // tipe charmamon
                     Charmamon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Squirt) != std::string::npos){
                     // tipe squirtmon
                     Squirtlmon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Pika) != std::string::npos){
                     // tipe pikamon
                     Pikamon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Rumble) != std::string::npos){
                     // tipe rumblemon
                     Rumblemon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Sno) != std::string::npos){
                     // tipe snommon
                     Snommon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Roto) != std::string::npos){
                     // tipe rotomon
                     Rotomon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Seal) != std::string::npos){
                     // tipe sealmon
                     Sealmon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Gastro) != std::string::npos){
                     // tipe gastromon
                     Gastromon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 }
             } else if (advBapak < advEmak){
                 // construct anak
                 if (typeEmak.find(Char) != std::string::npos){
                     // tipe charmamon
                     Charmamon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeEmak.find(Squirt) != std::string::npos){
                     // tipe squirtmon
                     Squirtlmon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeEmak.find(Pika) != std::string::npos){
                     // tipe pikamon
                     Pikamon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeEmak.find(Rumble) != std::string::npos){
                     // tipe rumblemon
                     Rumblemon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeEmak.find(Sno) != std::string::npos){
                     // tipe snommon
                     Snommon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeEmak.find(Roto) != std::string::npos){
                     // tipe rotomon
                     Rotomon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeEmak.find(Seal) != std::string::npos){
                     // tipe sealmon
                     Sealmon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeEmak.find(Gastro) != std::string::npos){
                     // tipe gastromon
                     Gastromon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 }
             } else {
                 // adv nya sama
@@ -364,71 +383,108 @@ Engimon& Player::breedingSpesies(Engimon& bapak, Engimon& emak){
                 typeEmak.find(Char) != std::string::npos){
                     // tipe charmamon
                     Charmamon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Squirt) != std::string::npos &&
                 typeEmak.find(Squirt) != std::string::npos){
                     // tipe squirtmon
                     Squirtlmon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Pika) != std::string::npos &&
                 typeEmak.find(Pika) != std::string::npos){
                     // tipe pikamon
                     Pikamon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Rumble) != std::string::npos &&
                 typeEmak.find(Rumble) != std::string::npos){
                     // tipe rumblemon
                     Rumblemon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Sno) != std::string::npos &&
                 typeEmak.find(Sno) != std::string::npos){
                     // tipe snommon
                     Snommon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Roto) != std::string::npos && 
                 typeEmak.find(Roto) != std::string::npos){
                     // tipe rotomon
                     Rotomon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Seal) != std::string::npos &&
                 typeEmak.find(Seal) != std::string::npos){
                     // tipe sealmon
                     Sealmon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 } else if(typeBapak.find(Gastro) != std::string::npos &&
                 typeEmak.find(Gastro) != std::string::npos){
                     // tipe gastromon
                     Gastromon child(namaAnak, bapak.getName(), emak.getName());
+                    *child1 = child;
                 }
             }
         }
         
-        ///// INHERIT SKILL /////
+        return *child1;
+    }else{
+        cout << "Level belum mencukupi" << endl;
+    }
+}
+
+void Player::inheritSkill(Engimon& bapak, Engimon& emak, Engimon& anak){
+    ///// INHERIT SKILL /////
+    Skill* skillAnak = new Skill();
+            ///// INHERIT SKILL /////
         for(int i=0 ; i<4 ; i++){
             if(bapak.getSkill()==emak.getSkill()){
                 if(bapak.getSkill()->getMasteryLevel()==emak.getSkill()->getMasteryLevel()){
                     // maka skill yang di-inherit memiliki
                     // mastery level bernilai mastery level parent A + 1
 
-                }
+    // selama skill belum full
+    while(!anak.isSkillFull()){
+        // jika skill sama
+        if(getSkillbyMastery(bapak,anak)==getSkillbyMastery(emak,anak)){
+            if(getSkillbyMastery(bapak,anak)->getMasteryLevel() > 
+            getSkillbyMastery(emak,anak)->getMasteryLevel()){
+                learnSkill(&anak, getSkillbyMastery(bapak,anak));
+            } else if(getSkillbyMastery(bapak,anak)->getMasteryLevel() < 
+            getSkillbyMastery(emak,anak)->getMasteryLevel()){
+                learnSkill(&anak, getSkillbyMastery(emak,anak));
+            } else { // mastery leve; sama
+                Skill* temp = new Skill();
+                temp = getSkillbyMastery(bapak,anak);
+                temp->incrementMasteryLevel();
+                learnSkill(&anak, temp);
+            }
+        } else{ // skill beda
+            if(getSkillbyMastery(bapak,anak)->getMasteryLevel() >= 
+            getSkillbyMastery(emak,anak)->getMasteryLevel()){
+                learnSkill(&anak, getSkillbyMastery(bapak,anak));
+            } else{
+                learnSkill(&anak, getSkillbyMastery(emak,anak));
             }
         }
     }
 }
 
-Element Player::decideChildElm(Engimon& bapak, Engimon& emak){
-    // udah work cara kek gini
-    string typeBapak = typeid(Engimon).name();
-    string typeEmak = typeid(Engimon).name();
-
-    // kasus i : elemen kedua parent sama
-    // spesies anak dipilih dari parent A atau B (pilih parent A)
-    if(bapak.getElemen()==emak.getElemen()){
-        return bapak.getElemen();
+void Player::breeding(Engimon& bapak, Engimon& emak) {
+    // construct berdasarkan spesies
+    if(bapak.getLevel() >= 30 && emak.getLevel()>=30){
+        Engimon* anak = new Engimon();
+        *anak = breedingSpesies(bapak,emak);
+        inheritSkill(bapak,emak,*anak);
     }
-    // kasus ii : elemen kedua parent berbeda maka 
-    // anak akan memiliki elemen dan spesies dari 
-    // elemen yang memiliki element advantage yang lebih tinggi.
-    else
-    {
-        float advBapak = GetAdv(bapak,emak);
-        float advEmak = GetAdv(emak,bapak);
-        if(advBapak>advEmak){
-            //diambil punya bapak
+}
 
+Skill* Player::getSkillbyMastery(Engimon& E, Engimon& anak){
+    Skill* skillAnak = new Skill();
+    int max = 0;
+    for(int i=0 ; i<4 ; i++){
+        // cari skill dengan mastery level tertinggi
+        int mastery = E.getAbility()[i].getMasteryLevel();
+        if(!anak.punyaSkill(E.getAbility()[i]) && max < mastery){
+            max = mastery;
+            *skillAnak = E.getAbility()[i];
         }
     }
+    return skillAnak;
 }

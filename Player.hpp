@@ -37,11 +37,13 @@ class Player {
         void deleteEngimonFromInventory(Engimon* E);
         void displayInventorySkill();
         void displayInventoryEngimon();
-        void learnSkill(Engimon* E);
+        void learnSkill(Engimon* E, Skill* S);
         void battle(Engimon* musuh);
         int sumBasePowMastery(Engimon*);
         Engimon& breedingSpesies(Engimon& bapak, Engimon& emak);
-        Element decideChildElm(Engimon& bapak, Engimon& emak);
+        void inheritSkill(Engimon& bapak, Engimon& emak, Engimon& anak);
+        void breeding (Engimon& bapak, Engimon& emak);
+        Skill* getSkillbyMastery(Engimon&, Engimon&);
 };
 
 #endif
