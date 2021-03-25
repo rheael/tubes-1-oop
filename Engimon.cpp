@@ -82,7 +82,7 @@ int Engimon::getLevel() {
     return level;
 }
 
-Skill* Engimon::getSkill(){
+Skill* Engimon::getSkill(){ 
     return this->ability;
 }
 
