@@ -67,6 +67,7 @@ Engimon& Engimon::operator=(const Engimon& E){
     for (int i = 0; i < 4; i++){
         this->ability[i] = E.ability[i];
     }
+    this->species = E.species;
     this->numAbility = E.numAbility;
     this->level = E.level;
     this->exp = E.exp;
@@ -99,13 +100,17 @@ Skill* Engimon::getSkill(){
 }
 
 // BUAT YANG VIRTUAL2 
-/*
 string Engimon::getParent1Species(){
     return "unknown";
 }
 string Engimon::getParent2Species(){
     return "unknown";
 }
+
+string Engimon::getSpecies(){
+    return "unknown";
+}
+
 void Engimon::talk(){
     return;
 }
@@ -119,7 +124,6 @@ Element Engimon::getElemen(){
 int Engimon::nbEl(){
     return 0;
 }
-*/
 
 void Engimon::setName(string nama){
     this->name = nama;
@@ -217,16 +221,19 @@ const string Charmamon::parentSpecies = "Charmamon";
 Charmamon::Charmamon(): Engimon(){
     this->ability[0] = uniqueSkill;
     numAbility++;
+    this->species = "Charmamon";
 }
 
 Charmamon::Charmamon(string nama):Engimon(nama){
     this->ability[0] = uniqueSkill;
     numAbility++;
+    this->species = "Charmamon";
 }
 
 Charmamon::Charmamon(string nama, string napar1, string napar2):Engimon(nama, napar1, napar2){
     this->ability[0] = uniqueSkill;
     numAbility++;
+    this->species = "Charmamon";
 }
 
 Skill Charmamon::getuniqueSkill(){

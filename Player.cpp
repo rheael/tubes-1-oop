@@ -206,7 +206,7 @@ int Player::sumBasePowMastery(Engimon* E){
     }
     return sum;
 }
-/*
+
 Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
     // kamus
     string typeBapak = typeid(bapak).name();
@@ -235,14 +235,18 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
     // spesies & elm anak dipilih dari parent A atau B (pilih parent A)
     if(bapak->getElemen()==emak->getElemen()){
         // construct anak
-        if (typeBapak.find(Char) == std::string::npos){
+        if (bapak->getSpecies()==Char){
             // tipe charmamon
-            Charmamon child(namaAnak, bapak->getName(), emak->getName());
-            *child1 = child;
+            Charmamon *child = new Charmamon(namaAnak, bapak->getName(), emak->getName());
+            child1 = child;
+            //cout << child->getSpecies() << endl;
+            //cout << child1->getSpecies() << endl << endl;
+            //cout << "anaknye char" << endl;
+            //delete child;
         } else if(typeBapak.find(Squirt) == std::string::npos){
             // tipe squirtmon
-            Squirtlmon child(namaAnak, bapak->getName(), emak->getName());
-            *child1 = child;
+            Squirtlmon *child = new Squirtlmon(namaAnak, bapak->getName(), emak->getName());
+            child1 = child;
         } else if(typeBapak.find(Pika) == std::string::npos){
             // tipe pikamon
             Pikamon child(namaAnak, bapak->getName(), emak->getName());
@@ -393,10 +397,10 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
             }
         }
     }
-    child1->showData();
+    cout << child1->getSpecies() << endl;
 
     return child1;
-}*/
+}
 
 void Player::inheritSkill(Engimon* bapak, Engimon* emak, Engimon* anak){
     ///// INHERIT SKILL /////
@@ -428,7 +432,7 @@ void Player::inheritSkill(Engimon* bapak, Engimon* emak, Engimon* anak){
         }
     }
 }
-/*
+
 void Player::breeding(Engimon* bapak, Engimon* emak) {
     // construct berdasarkan spesies
     if(bapak->getLevel() >= 30 && emak->getLevel()>=30){
@@ -437,7 +441,7 @@ void Player::breeding(Engimon* bapak, Engimon* emak) {
         inheritSkill(bapak,emak,anak);
         addEngimonToInventory(anak);
     }
-}*/
+}
 
 Skill* Player::getSkillbyMastery(Engimon* E, Engimon* anak){
     Skill* skillAnak = new Skill();
