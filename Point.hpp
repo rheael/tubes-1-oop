@@ -2,7 +2,7 @@
 
 #ifndef _POINT_HPP_
 #define _POINT_HPP_
-
+// #include "Engimon.hpp"
 #include <iostream>
 #include <cstring>
 
@@ -18,6 +18,7 @@ private:
     static const char low[]; // Array simbol huruf kecil
     static const char grass[]; // Array simbol engimon grass
     static const char sea[]; // Array simbol engimon sea
+    // Engimon* WildEngimonPtr; // Menyimpan data wild engimon yang ada di situ, not solved yet
 public:
     // Ctor, cctor, dtor, operator assignment (Kayaknya yang perlu cuma ctor)
     Point();
@@ -31,12 +32,14 @@ public:
     int getY() const;
     char getType() const;
     char getChara() const;
+    /* Engimon* getWildEngimon() const; */
 
     // Setter
     void setX(int x);
     void setY(int y);
     void setType(char t); // Kayaknya gaperlu, tipe tile gabisa berubah2 kan?
     void setChara(char c);
+    /*void setWildEngimon(Engimon* e);*/
 
     // Boolean function
     bool isMember(const char arr[], char t, int size); // Mengembalikan true jika t merupakan anggota dari array of char arr
