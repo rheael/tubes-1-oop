@@ -185,7 +185,7 @@ void Map::randomizeWildEngimonMove() {
             else {
                 newRo=currentRo+i;
             }
-            if(isWildAuthorized(e,newRo,newCol)) {
+            if(isWildAuthorized(e,newCol,newRo)) {
                 setMapCharaAt(newCol, newRo,engimonChara(e)); // engimon type later, maybe store the chara in engimon
                 setMapCharaAt(currentCol, currentRo,' ');
                 setMapWildEngiAt(newCol, newRo,e);
