@@ -4,6 +4,7 @@ using namespace std;
 
 int main() {
     // TEST 1
+    /*
     Charmamon *C1 = new Charmamon();
     C1->showData();
 
@@ -19,5 +20,12 @@ int main() {
     Skill S2;
     C2 << S2;
     C2.showData();
+    */
+
+    Engimon** daftarEngimon = new Engimon*[10];
+    Charmamon C1("charmy");
+    daftarEngimon[0] = &C1;
+    daftarEngimon[0]->showData();
+
     return 0;
 }

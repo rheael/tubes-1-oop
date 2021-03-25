@@ -100,6 +100,7 @@ Skill* Engimon::getSkill(){
 }
 
 // BUAT YANG VIRTUAL2 
+/*
 string Engimon::getParent1Species(){
     return "unknown";
 }
@@ -124,6 +125,7 @@ Element Engimon::getElemen(){
 int Engimon::nbEl(){
     return 0;
 }
+*/
 
 void Engimon::setName(string nama){
     this->name = nama;
@@ -162,7 +164,7 @@ void Engimon::showData(){
     cout << "Level: "<<this->level << endl;
     cout << "Exp: " << this->exp << endl;
     cout << "Cumulative Exp: "<<this->cumulativeExp << endl;
-    cout << "Skills: (" << this->numAbility << ")";
+    cout << "Skills: ";
     for (int i = 0; i < this->numAbility; i++)
     {
         if (i != 0) {
