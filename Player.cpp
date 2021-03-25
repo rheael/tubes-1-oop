@@ -171,8 +171,7 @@ void Player::battle(Engimon* musuh){
                 sumBasePowMastery(musuh);
     
     if(myPower>enemyPower){
-        // print ascii win message
-        cout << "menang" << endl;
+        printAsciiMenang();
         cout << "Your Power  : " << myPower << "\nEnemy Power : " << enemyPower << endl;
         cout << endl;
         // active engimon menerima exp
@@ -415,11 +414,15 @@ void Player::inheritSkill(Engimon* bapak, Engimon* emak, Engimon* anak){
 
 void Player::breeding(Engimon* bapak, Engimon* emak) {
     // construct berdasarkan spesies
-    if(bapak->getLevel() >= 30 && emak->getLevel()>=30){
+    if(bapak->getLevel() > 30 && emak->getLevel()>30){
         Engimon* anak = new Engimon();
         anak = breedingSpesies(bapak,emak);
         inheritSkill(bapak,emak,anak);
         addEngimonToInventory(anak);
+    }
+    else
+    {
+        cout << "Level engimon kamu belum mencukupi";
     }
 }
 
@@ -522,8 +525,8 @@ void Player::printAsciiKalah(){
     cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$'                     `$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << endl;
     cout << "$$$'`$$$$$$$$$$$$$'`$$$$$$!                         !$$$$$$'`$$$$$$$$$$$$$'`$$$" << endl;
     cout << "$$$$  $$$$$$$$$$$  $$$$$$$                           $$$$$$$  $$$$$$$$$$$  $$$$" << endl;
-    cout << "$$$$. `$' t' b$   $$$$$$$!         Y  O  U            !$$$$$$$  '$/ `/ `$' .$$$" << endl;
-    cout << "$$$$$. !b  i  i .$$$$$$$$         L  O  S  E          $$$$$$$$. i  i  /! .$$$$$" << endl;
+    cout << "$$$$. `$' \\' \\$   $$$$$$$!          Y  O  U           !$$$$$$$  '$/ `/ `$' .$$$" << endl;
+    cout << "$$$$$. !\\  i  i .$$$$$$$$          L  O  S  E         $$$$$$$$. i  i  /! .$$$$$" << endl;
     cout << "$$$$$$   `--`--.$$$$$$$$$                             $$$$$$$$$.--'--'   $$$$$$" << endl;
     cout << "$$$$$$L        `$$$$$^^$$                             $$^^$$$$$'        J$$$$$$" << endl;
     cout << "$$$$$$$.   .'   ""~   $$$$$     $.                 .$   $$$   ~""   `.   .$$$$$$$$$" << endl;
@@ -536,4 +539,22 @@ void Player::printAsciiKalah(){
     cout << "                                  `$        $'" << endl;
     cout << "                                   `$$$$$$$$'" << endl;
     //cout << endl;
+}
+
+void Player::printAsciiMenang(){
+    cout << "        .--'''''''''--." << endl;
+    cout << "     .'      .---.      '.   \\ \\ /\\ / / _ \\ \\ /\\ / /" << endl;
+    cout << "    /    .-----------.    \\   \\ V  V / (_) \\ V  V /" << endl;
+    cout << "   /        .-----.        \\  _\\_/__/______ \\__\\_/" << endl;
+    cout << "   |       .-.   .-.       |  | | | |/ _ \\| | | |" << endl;
+    cout << "   |      /   \\ /   \\       | | |_| | (_) | |_| |" << endl;
+    cout << "    \\    | .-. | .-. |    /    \\__, |\\___/ \\__,_| " << endl;
+    cout << "     '-._| | | | | | |_.-'      __/ |  (_)" << endl;
+    cout << "         | '-' | '-' |        _____/  ___ _ __ " << endl;
+    cout << "          \\___/ \\___/         \\ \\ /\\ / / | '_ \\" << endl;
+    cout << "       _.-'  /   \\  `-._       \\ V  V /| | | | |" << endl;
+    cout << "     .' _.--|     |--._ '.      \\_/\\_/ |_|_| |_|" << endl;
+    cout << "     ' _...-|     |-..._ '" << endl;
+    cout << "            |     |" << endl;
+    cout << "            '.___.'" << endl;
 }

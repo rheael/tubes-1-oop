@@ -46,6 +46,7 @@ class Player {
         float getAdvantage(Engimon*,Engimon*);
         Engimon* generateRandomChild(string namaAnak, string namaBapak, string namaEmak);
         void printAsciiKalah();
+        void printAsciiMenang();
 };
 
 #endif
