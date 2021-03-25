@@ -80,9 +80,9 @@ char Point::getChara() const {
     return this->chara;
 }
 
-/*Engimon* Point::getWildEngimon() const {
+Engimon* Point::getWildEngimon() const {
     return this->WildEngimonPtr;
-} */
+}
 
 // Setter
 void Point::setX(int x) {
@@ -102,9 +102,9 @@ void Point::setChara(char c) {
     this->chara = c;
 }
 
-/* void Point::setWildEngimon(Engimon* e) {
+void Point::setWildEngimon(Engimon* e) {
     this->WildEngimonPtr=e;
-}*/
+}
 
 
 // Boolean function

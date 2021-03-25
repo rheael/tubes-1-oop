@@ -47,17 +47,13 @@ void Map::displayMap() {
     }
 }
 
-// when engimon levels up, maybe just check whether it has gone to a level
-// where it can be capitalized or not
-// and then setChara with capitalized type of the engi
-
 void Map::setMapCharaAt(int x, int y, char chara) {
     map[y][x].setChara(chara);
 }
 
-/*void Map::setMapWildEngiAt(int x, int y, Engimon* e) {
+void Map::setMapWildEngiAt(int x, int y, Engimon* e) {
     map[y][x].setWildEngimon(e);
-}*/
+}
 
 char Map::getMapCharaAt(int x,int y) {
     return(map[y][x].getChara());
@@ -67,9 +63,9 @@ char Map::getMapTypeAt(int x,int y) {
     return(map[y][x].getType());
 }
 
-/*Engimon* Map::getMapWildEngiAt(int x, int y) {
+Engimon* Map::getMapWildEngiAt(int x, int y) {
     return(map[y][x].getWildEngimon());
-}*/
+}
 
 /*Engimon&*/ void Map::spawnWildEngimon() {
     // User will input max spawned Engimon, probably on main
@@ -82,21 +78,19 @@ char Map::getMapTypeAt(int x,int y) {
         int newY=j%9;
         if(!map[newY][newX].isOccupied()) {
             if(map[newY][newX].getType()=='-') { // the type of tile
-                if(isAuthorized('f',newX,newY)) {
+                if(isAuthorized(newX,newY)) {
                     Engimon* wildEngi = new Charmamon();
-                    // *wildEngi = Charmamon;
                     cout << "There comes charmamon!" << endl; 
                     setMapCharaAt(newX, newY, 'f');
-                    // setMapWildEngiAt(newX, newY,wildEngi);
+                    setMapWildEngiAt(newX, newY,wildEngi);
                 }
             }
             else {
-                if(isAuthorized('i',newX,newY)) {
+                if(isAuthorized(newX,newY)) {
                     Engimon* wildEngi = new Snommon();
-                    // *wildEngi = Snommon;
                     cout << "There comes snommon!" << endl;
                     setMapCharaAt(newX, newY, 'i');
-                    //setMapWildEngiAt(newX, newY,wildEngi);
+                    setMapWildEngiAt(newX, newY,wildEngi);
                 }
             }
         }
@@ -127,7 +121,7 @@ void Map::getMove(string move, char chara) {
         newX=x+1;
         newY=y;
     }
-    if(isAuthorized(chara,newX,newY) && (!map[newY][newX].isOccupied())) {
+    if(isAuthorized(newX,newY) && (!map[newY][newX].isOccupied())) {
         setMapCharaAt(newX,newY,chara);
         setMapCharaAt(x,y,' ');
     }
@@ -151,37 +145,70 @@ Point Map::getPosition(char chara) {
     return charaPosition;
 }
 
-bool Map::isAuthorized(char chara, int col, int ro) {
+bool Map::isAuthorized(int col, int ro) {
     return (col>=0 && col<column && ro>=0 && ro<row);
 }
 
 // throw exception(?) if wildengi and player goes to the same tile
 // dunno if its handled on the driver or here
 void Map::randomizeWildEngimonMove() {
-    /* int currentCol=rand()%12;
+    int currentCol=rand()%12;
     int currentRo=rand()%9;
-    // Engimon* e=getMapWildEngiAt(currentCol, currentRo); // could be null
+    Engimon* e=getMapWildEngiAt(currentCol, currentRo); // could be null
     int randomizer=rand();
     if(e!=NULL) {
-        if(randomizer%5==0) {
-            //if(isWildAuthorized()) {
-                int i=rand()%(1-(-1)+1)+1;
-                setMapCharaAt(currentCol+i, currentRo+i,'E'); // engimon type later
+        int i=rand()%(2)-1;
+        int j=rand();
+        if(i!=0) {
+            int newCol=currentCol;
+            int newRo=currentRo;
+            if(j%2==0) {
+                newCol=currentCol+i;
+            }
+            else {
+                newRo=currentRo+i;
+            }
+            if(isWildAuthorized(e,newRo,newCol)) {
+                setMapCharaAt(newCol, newRo,'f'); // engimon type later, maybe store the chara in engimon
                 setMapCharaAt(currentCol, currentRo,' ');
-                setMapWildEngiAt(currentCol+i, currentRo+i,e);
+                setMapWildEngiAt(newCol, newRo,e);
                 setMapWildEngiAt(currentCol, currentRo, NULL);
-            //}
-            cout << "the wild engimon has moved" << endl;
+            }
+                cout << "the wild engimon has moved" << endl;
         }
-    } */
+    }
 }
 
 // if the wild engi is fire, ground, electric : only on grassland
 // if the wild engi is water / ice : only on sea
-/* bool Map::isWildAuthorized(Engimon* e) {
-    // engimon type
-} */
 
+bool Map::isGrassland(Engimon* e) {
+    return (e->punyaElemen("water")) && (e->punyaElemen("ice"));
+}
+
+bool Map::isWater(Engimon* e) {
+    return (e->punyaElemen("ground") && (e->punyaElemen("fire") && (e->punyaElemen("electric"))));
+}
+
+bool Map::isWildAuthorized(Engimon* e, int col, int ro) {
+    if(!isGrassland(e) && isWater(e)) {
+        return(isAuthorized(col,ro) && map[col][ro].getType()=='o'); 
+    }
+    else if(isGrassland(e) && !isWater(e)) {
+        return(isAuthorized(col,ro) && map[col][ro].getType()=='-');
+    }
+    else { // compatible for both
+        return(isAuthorized(col,ro));
+    }
+}
+
+bool Map::isLevelMoreThan(Engimon* e,int level) {
+    return(e->getLevel()>level);
+}
+
+// when engimon levels up, maybe just check whether it has gone to a level
+// where it can be capitalized or not
+// and then setChara with capitalized type of the engi
 
 /* 
 g++ map.cpp point.cpp driver_map.cpp engimon.cpp element.cpp skill.cpp -o drivermap1
