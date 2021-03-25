@@ -6,17 +6,19 @@ using namespace std;
 int main(){
     Player*p = new Player();
     Charmamon*ch = new Charmamon();
-    Charmamon*ch1 = new Charmamon();
+    Gastromon*ch1 = new Gastromon();
     Squirtlmon*sq = new Squirtlmon();
     Squirtlmon*sq1 = new Squirtlmon();
+    Rumblemon*r = new Rumblemon();
     ch->setLevel(31);
     sq->setLevel(31);
     ch1->setLevel(31);
     sq1->setLevel(31);
+    r->setLevel(31);
     //Engimon a(*p->breedingSpesies(ch,ch1));
     //a.showData();
 
-    p->breeding(sq,sq1);
+    p->breeding(ch,sq);
     // udah work
     p->changeActiveEngimon();
     p->getActiveEngimon()->showData();
@@ -30,4 +32,6 @@ int main(){
 
     //charmamon x charmamon     v
     //squirtlmon x squirtlmon   v
+    //spesies sama udah work
+    //beda spesies (bapak lebih gede)
 }
