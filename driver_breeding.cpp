@@ -9,7 +9,7 @@ int main(){
     Charmamon*ch1 = new Charmamon();
     Squirtlmon*sq = new Squirtlmon();
     Squirtlmon*sq1 = new Squirtlmon();
-    Rumblemon*r = new Rumblemon();
+    Rotomon*r = new Rotomon();
     ch->setLevel(31);
     sq->setLevel(31);
     ch1->setLevel(31);
@@ -18,25 +18,34 @@ int main(){
     //Engimon a(*p->breedingSpesies(ch,ch1));
     //a.showData();
 
-    p->breeding(ch,ch1);
+    p->breeding(ch1,r);
     // udah work
     p->changeActiveEngimon();
     p->getActiveEngimon()->showData();
-
+    /*
     cout << "\n\n";
     if(ch->getElemen().isSama(ch1->getElemen())){
         cout << "sama jir" << endl;
     } else { cout << "ga" << endl;}
+    */
+    // ud work
+    cout << "\n\n";
+    Engimon*engi = new Engimon();
+    engi = p->generateRandomChild("acim","acom","acem");
+    engi->showData();
 
     delete p;
     delete ch;
     delete ch1;
     delete sq;
     delete sq1;
+    delete r;
+    delete engi;
     return 0;
 
     //charmamon x charmamon     v
     //squirtlmon x squirtlmon   v
     //spesies sama udah work
-    //beda spesies (bapak lebih gede)
+    //beda spesies adv beda udah work
+    //beda spesies adv sama
 }

@@ -328,12 +328,8 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
                 child1 = child;
             }
             
-        } else if(advBapak == advEmak){
-
-        } else { //bapak lebih kecil
+        } else if (advBapak<advEmak) { //bapak lebih kecil
             cout << "emak lebih gede dr bapak woy" << endl;
-            //diambil punya emak
-            // construct anak
             if (emak->getSpecies()==Char){
                 // tipe charmamon
                 Charmamon *child = new Charmamon(namaAnak, bapak->getName(), emak->getName());
@@ -371,51 +367,15 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
                 Gastromon *child = new Gastromon(namaAnak, bapak->getName(), emak->getName());
                 child1 = child;
             }
-        } /*else {
+        } else {
             // adv nya sama
-            // construct anak
-            if (typeBapak.find(Char) != std::string::npos &&
-            typeEmak.find(Char) != std::string::npos){
-                // tipe charmamon
-                Charmamon child(namaAnak, bapak->getName(), emak->getName());
-                *child1 = child;
-            } else if(typeBapak.find(Squirt) != std::string::npos &&
-            typeEmak.find(Squirt) != std::string::npos){
-                // tipe squirtmon
-                Squirtlmon child(namaAnak, bapak->getName(), emak->getName());
-                *child1 = child;
-            } else if(typeBapak.find(Pika) != std::string::npos &&
-            typeEmak.find(Pika) != std::string::npos){
-                // tipe pikamon
-                Pikamon child(namaAnak, bapak->getName(), emak->getName());
-                *child1 = child;
-            } else if(typeBapak.find(Rumble) != std::string::npos &&
-            typeEmak.find(Rumble) != std::string::npos){
-                // tipe rumblemon
-                Rumblemon child(namaAnak, bapak->getName(), emak->getName());
-                *child1 = child;
-            } else if(typeBapak.find(Sno) != std::string::npos &&
-            typeEmak.find(Sno) != std::string::npos){
-                // tipe snommon
-                Snommon child(namaAnak, bapak->getName(), emak->getName());
-                *child1 = child;
-            } else if(typeBapak.find(Roto) != std::string::npos && 
-            typeEmak.find(Roto) != std::string::npos){
-                // tipe rotomon
-                Rotomon child(namaAnak, bapak->getName(), emak->getName());
-                *child1 = child;
-            } else if(typeBapak.find(Seal) != std::string::npos &&
-            typeEmak.find(Seal) != std::string::npos){
-                // tipe sealmon
-                Sealmon child(namaAnak, bapak->getName(), emak->getName());
-                *child1 = child;
-            } else if(typeBapak.find(Gastro) != std::string::npos &&
-            typeEmak.find(Gastro) != std::string::npos){
-                // tipe gastromon
-                Gastromon child(namaAnak, bapak->getName(), emak->getName());
-                *child1 = child;
+            // construct anak yang beda dari parent
+            cout << "case adv sama" << endl;
+            child1 = generateRandomChild(namaAnak,bapak->getName(),emak->getName());
+            while(child1->getSpecies()==bapak->getSpecies() || child1->getSpecies()==emak->getSpecies()){
+                child1 = generateRandomChild(namaAnak,bapak->getName(),emak->getName());
             }
-        }*/
+        }
     }
     cout << child1->getSpecies() << endl;
 
@@ -475,6 +435,37 @@ Skill* Player::getSkillbyMastery(Engimon* E, Engimon* anak){
         }
     }
     return skillAnak;
+}
+
+Engimon* Player::generateRandomChild(string namaAnak, string namaBapak, string namaEmak){
+    int random = rand() % 8 + 1; //angka 1 sampe 8
+    Engimon* child1 = new Engimon();
+    if(random==1){
+        Charmamon *child = new Charmamon(namaAnak, namaBapak, namaEmak);
+        child1 = child;
+    } else if(random==2){
+        Squirtlmon *child = new Squirtlmon(namaAnak, namaBapak, namaEmak);
+        child1 = child;
+    } else if(random==3){
+        Pikamon *child = new Pikamon(namaAnak, namaBapak, namaEmak);
+        child1 = child;
+    } else if(random==4){
+        Rumblemon *child = new Rumblemon(namaAnak, namaBapak, namaEmak);
+        child1 = child;
+    } else if(random==5){
+        Snommon *child = new Snommon(namaAnak, namaBapak, namaEmak);
+        child1 = child;
+    } else if(random==6){
+        Rotomon *child = new Rotomon(namaAnak, namaBapak, namaEmak);
+        child1 = child;
+    } else if(random==7){
+        Sealmon *child = new Sealmon(namaAnak, namaBapak, namaEmak);
+        child1 = child;
+    } else if(random==8){
+        Gastromon *child = new Gastromon(namaAnak, namaBapak, namaEmak);
+        child1 = child;
+    }
+    return child1;
 }
 
 float Player::getAdvantage(Engimon* user,Engimon* enemy){

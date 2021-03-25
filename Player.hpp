@@ -44,6 +44,7 @@ class Player {
         //void breeding (Engimon* bapak, Engimon* emak);
         Skill* getSkillbyMastery(Engimon*, Engimon*);
         float getAdvantage(Engimon*,Engimon*);
+        Engimon* generateRandomChild(string namaAnak, string namaBapak, string namaEmak);
         void printAsciiKalah();
 };
 
