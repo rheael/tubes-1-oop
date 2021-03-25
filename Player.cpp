@@ -169,11 +169,11 @@ void Player::battle(Engimon* musuh){
     int enemyPower = musuh->getLevel() * enmElmAdvantage +
                 sumBasePowMastery(musuh);
     
-    cout << "mypower : " << myPower << "\nenmpower : " << enemyPower << endl;
-    
     if(myPower>enemyPower){
         // print ascii win message
         cout << "menang" << endl;
+        cout << "Your Power  : " << myPower << "\nEnemy Power : " << enemyPower << endl;
+        cout << endl;
         // active engimon menerima exp
         // asumsi besarannya 35
         currentEngimon->addExp(35);
@@ -186,10 +186,13 @@ void Player::battle(Engimon* musuh){
 
     } else {
         // print ascii lose message
-        cout << "kalah" << endl;
+        printAsciiKalah();
+        cout << "Your Power  : " << myPower << "\nEnemy Power : " << enemyPower << endl;
+        cout << endl;
         // engimon akan mati
         currentEngimon->die();
-
+        deleteEngimonFromInventory(currentEngimon);
+        changeActiveEngimon();
         // player bs pilih command kek biasa
     }
 }
@@ -203,7 +206,7 @@ int Player::sumBasePowMastery(Engimon* E){
     }
     return sum;
 }
-
+/*
 Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
     // kamus
     string typeBapak = typeid(bapak).name();
@@ -393,7 +396,7 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
     child1->showData();
 
     return child1;
-}
+}*/
 
 void Player::inheritSkill(Engimon* bapak, Engimon* emak, Engimon* anak){
     ///// INHERIT SKILL /////
@@ -425,7 +428,7 @@ void Player::inheritSkill(Engimon* bapak, Engimon* emak, Engimon* anak){
         }
     }
 }
-
+/*
 void Player::breeding(Engimon* bapak, Engimon* emak) {
     // construct berdasarkan spesies
     if(bapak->getLevel() >= 30 && emak->getLevel()>=30){
@@ -434,7 +437,7 @@ void Player::breeding(Engimon* bapak, Engimon* emak) {
         inheritSkill(bapak,emak,anak);
         addEngimonToInventory(anak);
     }
-}
+}*/
 
 Skill* Player::getSkillbyMastery(Engimon* E, Engimon* anak){
     Skill* skillAnak = new Skill();
@@ -497,4 +500,25 @@ float Player::getAdvantage(Engimon* user,Engimon* enemy){
         
     }
     return maks;
+}
+
+void Player::printAsciiKalah(){
+    cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'                 `$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << endl;
+    cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$'                     `$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << endl;
+    cout << "$$$'`$$$$$$$$$$$$$'`$$$$$$!                         !$$$$$$'`$$$$$$$$$$$$$'`$$$" << endl;
+    cout << "$$$$  $$$$$$$$$$$  $$$$$$$                           $$$$$$$  $$$$$$$$$$$  $$$$" << endl;
+    cout << "$$$$. `$' t' b$   $$$$$$$!         Y  O  U            !$$$$$$$  '$/ `/ `$' .$$$" << endl;
+    cout << "$$$$$. !b  i  i .$$$$$$$$         L  O  S  E          $$$$$$$$. i  i  /! .$$$$$" << endl;
+    cout << "$$$$$$   `--`--.$$$$$$$$$                             $$$$$$$$$.--'--'   $$$$$$" << endl;
+    cout << "$$$$$$L        `$$$$$^^$$                             $$^^$$$$$'        J$$$$$$" << endl;
+    cout << "$$$$$$$.   .'   ""~   $$$$$     $.                 .$   $$$   ~""   `.   .$$$$$$$$$" << endl;
+    cout << "$$$$$$$$.  ;      .e$$$$$!     $$.             .$$   !$$$$$e,      ;  .$$$$$$$$" << endl;
+    cout << "$$$$$$$$$   `.$$$$$$$$$$$$      $$$.         .$$$    $$$$$$$$$$$$.'   $$$$$$$$$" << endl;
+    cout << "$$$$$$$$    .$$$$$$$$$$$$$!      $$`$$$$$$$$'$$     !$$$$$$$$$$$$$.    $$$$$$$$" << endl;
+    cout << "$JT&yd$     $$$$$$$$$$$$$$$$.     $    $$    $    .$$$$$$$$$$$$$$$$     $by&TL$" << endl;
+    cout << "                                  $    $$    $" << endl;
+    cout << "                                  $.   $$   .$" << endl;
+    cout << "                                  `$        $'" << endl;
+    cout << "                                   `$$$$$$$$'" << endl;
+    //cout << endl;
 }

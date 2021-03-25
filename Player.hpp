@@ -1,7 +1,7 @@
 #ifndef __PLAYER_HPP__
 #define __PLAYER_HPP__
 
-#include "Engimon.hpp"
+//#include "Engimon.hpp"
 #include "Point.hpp"
 #include "Inventory.hpp"
 #include "InventoryItem.hpp"
@@ -44,6 +44,7 @@ class Player {
         //void breeding (Engimon* bapak, Engimon* emak);
         Skill* getSkillbyMastery(Engimon*, Engimon*);
         float getAdvantage(Engimon*,Engimon*);
+        void printAsciiKalah();
 };
 
 #endif
