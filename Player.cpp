@@ -388,7 +388,7 @@ void Player::inheritSkill(Engimon* bapak, Engimon* emak, Engimon* anak){
 
     // selama skill belum full
     while(!anak->isSkillFull()){
-        // jika skill sama
+        // jika skill dimiliki kedua parent
         if(getSkillbyMastery(bapak,anak)->getnama()==getSkillbyMastery(emak,anak)->getnama()){
             if(getSkillbyMastery(bapak,anak)->getMasteryLevel() > 
             getSkillbyMastery(emak,anak)->getMasteryLevel()){

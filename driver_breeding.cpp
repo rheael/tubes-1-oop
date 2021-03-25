@@ -30,10 +30,11 @@ int main(){
     p->changeActiveEngimon();
     p->getActiveEngimon()->showData();
     cout << "\n\n";
-    g->showData();
+    //g->showData();
     Skill b(*p->getSkillbyMastery(ch,g));
     //r->operator<<(b);
-    r->showData();
+    //r->showData();
+    
     delete p;
     delete ch;
     delete ch1;
