@@ -10,37 +10,38 @@ int main(){
     Squirtlmon*sq = new Squirtlmon();
     Squirtlmon*sq1 = new Squirtlmon();
     Rotomon*r = new Rotomon();
+    Gastromon*g = new Gastromon();
     ch->setLevel(31);
     sq->setLevel(31);
     ch1->setLevel(31);
     sq1->setLevel(31);
     r->setLevel(31);
-    //Engimon a(*p->breedingSpesies(ch,ch1));
-    //a.showData();
+    g->setLevel(31);
 
-    p->breeding(ch1,r);
+    
+
+    // tes getmastery
+    string arr_fire [] = {"Fire"};
+    Skill a("Silat",10,1,1,arr_fire);
+    g->operator<<(a);
+
+    p->breeding(g,r);
     // udah work
     p->changeActiveEngimon();
     p->getActiveEngimon()->showData();
-    /*
     cout << "\n\n";
-    if(ch->getElemen().isSama(ch1->getElemen())){
-        cout << "sama jir" << endl;
-    } else { cout << "ga" << endl;}
-    */
-    // ud work
-    cout << "\n\n";
-    Engimon*engi = new Engimon();
-    engi = p->generateRandomChild("acim","acom","acem");
-    engi->showData();
-
+    g->showData();
+    Skill b(*p->getSkillbyMastery(ch,g));
+    //r->operator<<(b);
+    r->showData();
     delete p;
     delete ch;
     delete ch1;
     delete sq;
     delete sq1;
     delete r;
-    delete engi;
+    delete g;
+
     return 0;
 
     //charmamon x charmamon     v

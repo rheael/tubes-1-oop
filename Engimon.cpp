@@ -192,14 +192,7 @@ Skill* Engimon::getAbility(){
 }
 
 bool Engimon::isSkillFull(){
-    bool full = true;
-    for(int i=0;i>4;i++){
-        if(this->ability[i].getnama()=="XXX"){
-            full = false;
-            break;
-        }
-    }
-    return full;
+    return(this->numAbility>=4);
 }
 
 void Engimon::addNewSkill(Skill S) {

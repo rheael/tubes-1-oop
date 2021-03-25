@@ -20,6 +20,7 @@ int main(){
     p->battle(ch);
     p->displayInventoryEngimon();
     p->getActiveEngimon()->showData();
+    p->displayInventorySkill();
     delete p;
     delete ch;
     delete ch1;

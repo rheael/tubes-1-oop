@@ -181,9 +181,9 @@ void Player::battle(Engimon* musuh){
         
         // mendapatkan engimon lawan
         addEngimonToInventory(musuh);
-
+        
         // mendapatkan random skill kompatibel dengan elemen musuh
-        // mungkin dibikin generateRandomSkill based on engimon's element
+        addSkillToInventory(&musuh->getAbility()[0]);
 
     } else {
         // print ascii lose message
@@ -389,25 +389,25 @@ void Player::inheritSkill(Engimon* bapak, Engimon* emak, Engimon* anak){
     // selama skill belum full
     while(!anak->isSkillFull()){
         // jika skill sama
-        if(getSkillbyMastery(bapak,anak)==getSkillbyMastery(emak,anak)){
+        if(getSkillbyMastery(bapak,anak)->getnama()==getSkillbyMastery(emak,anak)->getnama()){
             if(getSkillbyMastery(bapak,anak)->getMasteryLevel() > 
             getSkillbyMastery(emak,anak)->getMasteryLevel()){
-                learnSkill(anak, getSkillbyMastery(bapak,anak));
+                anak->operator<<(*getSkillbyMastery(bapak,anak));
             } else if(getSkillbyMastery(bapak,anak)->getMasteryLevel() < 
             getSkillbyMastery(emak,anak)->getMasteryLevel()){
-                learnSkill(anak, getSkillbyMastery(emak,anak));
-            } else { // mastery leve; sama
+                anak->operator<<(*getSkillbyMastery(emak,anak));
+            } else { // mastery level sama
                 Skill* temp = new Skill();
                 temp = getSkillbyMastery(bapak,anak);
                 temp->incrementMasteryLevel();
-                learnSkill(anak, temp);
+                anak->operator<<(*temp);
             }
         } else{ // skill beda
             if(getSkillbyMastery(bapak,anak)->getMasteryLevel() >= 
             getSkillbyMastery(emak,anak)->getMasteryLevel()){
-                learnSkill(anak, getSkillbyMastery(bapak,anak));
+                anak->operator<<(*getSkillbyMastery(bapak,anak));
             } else{
-                learnSkill(anak, getSkillbyMastery(emak,anak));
+                anak->operator<<(*getSkillbyMastery(emak,anak));
             }
         }
     }
