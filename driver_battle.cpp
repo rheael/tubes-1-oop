@@ -5,7 +5,7 @@ using namespace std;
 
 int main(){
     Player*p = new Player();
-    Squirtlmon*ch = new Squirtlmon();
+    Snommon*ch = new Snommon();
     Rotomon*ch1 = new Rotomon();
     Squirtlmon*sq = new Squirtlmon();
     //ch->setLevel(31);
@@ -13,7 +13,7 @@ int main(){
     //ch1->setLevel(31);
 
     p->getActiveEngimon()->setLevel(40);
-    ch->setLevel(39);
+    //ch->setLevel(20);
     p->getActiveEngimon()->showData();
     cout <<"\n";
 

@@ -179,7 +179,7 @@ void Player::battle(Engimon* musuh){
         currentEngimon->addExp(35);
         
         // mendapatkan engimon lawan
-        InventoryEngimon->addItem(musuh);
+        addEngimonToInventory(musuh);
 
         // mendapatkan random skill kompatibel dengan elemen musuh
         // mungkin dibikin generateRandomSkill based on engimon's element
@@ -228,6 +228,10 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
         << " : ";
     cin >> namaAnak;
     
+    float advBapak = getAdvantage(bapak,emak);
+    float advEmak = getAdvantage(emak,bapak);
+    cout << "\nbapak : " << advBapak << "\nemak : " << advEmak << "\n\n";
+
     Engimon* child1 = new Engimon();
     // construct engimon baru (mesti nentuin elmnya dulu)
     // kasus i : elemen kedua parent sama
@@ -277,9 +281,7 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
         // kasus ii & iii : elemen kedua parent berbeda maka 
         // anak akan memiliki elemen dan spesies dari 
         // elemen yang memiliki element advantage yang lebih tinggi.
-        float advBapak = getAdvantage(bapak,emak);
-        float advEmak = getAdvantage(emak,bapak);
-        cout << "\nbapak : " << advBapak << "\nemak : " << advEmak << "\n\n";
+        
         if(advBapak>advEmak){
             //diambil punya bapak
             // construct anak
