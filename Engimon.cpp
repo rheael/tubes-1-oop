@@ -71,6 +71,7 @@ Engimon& Engimon::operator=(const Engimon& E){
     this->level = E.level;
     this->exp = E.exp;
     this->cumulativeExp = E.cumulativeExp;
+    return *this;
 }
 
 Engimon::~Engimon(){
@@ -97,7 +98,8 @@ Skill* Engimon::getSkill(){
     return this->ability;
 }
 
-// BUAT YANG VIRTUAL2
+// BUAT YANG VIRTUAL2 
+/*
 string Engimon::getParent1Species(){
     return "unknown";
 }
@@ -117,7 +119,7 @@ Element Engimon::getElemen(){
 int Engimon::nbEl(){
     return 0;
 }
-//
+*/
 
 void Engimon::setName(string nama){
     this->name = nama;
@@ -264,6 +266,10 @@ int Charmamon::nbEl(){
     *a = elemen;
     return((*a).getjmlel());
 }
+
+string Charmamon::getSpecies(){
+    return "Charmamon";
+}
 // -------DERIVED CLASS : WATER ENGIMONS ----------------
 string arr_water [] = {"Water"};
 Skill b("Torrent",10,1,1,arr_water);
@@ -326,6 +332,10 @@ Element Squirtlmon :: getElemen(){
     return (this->elemen);
 }
 
+string Squirtlmon::getSpecies(){
+    return "Squirtlmon";
+}
+
 // -------DERIVED CLASS : ELECTRIC ENGIMONS ----------------
 string arr_electric [] = {"Electric"};
 Skill c("Static",10,1,1,arr_electric);
@@ -383,6 +393,10 @@ Element Pikamon :: getElemen(){
     return (this->elemen);
 }
 
+string Pikamon::getSpecies(){
+    return "Pikamon";
+}
+
 // -------DERIVED CLASS : GROUND ENGIMONS ----------------
 string arr_ground [] = {"Ground"};
 Skill d("Sand Veil",10,1,1,arr_ground);
@@ -423,7 +437,7 @@ void Rumblemon::showData(){
 }
 
 void Rumblemon::talk(){
-     cout << "[" << this->name << "]: Rumble, rumble, attack!!!" << endl;
+     cout << "[" << this->name << "]: Rumble, rumble, rumble!!" << endl;
 }
 
 bool Rumblemon::punyaElemen(string elem){
@@ -438,6 +452,10 @@ int Rumblemon::nbEl(){
 
 Element Rumblemon :: getElemen(){
     return (this->elemen);
+}
+
+string Rumblemon::getSpecies(){
+    return "Rumblemon";
 }
 
 // -------DERIVED CLASS : ICE ENGIMONS ----------------
@@ -495,6 +513,10 @@ int Snommon::nbEl(){
 
 Element Snommon :: getElemen(){
     return (this->elemen);
+}
+
+string Snommon::getSpecies(){
+    return "Snommon";
 }
 
 // -------DERIVED CLASS : ELECTROFIRE ENGIMONS ----------------
@@ -566,6 +588,10 @@ Element Rotomon :: getElemen(){
     return (this->elemen);
 }
 
+string Rotomon::getSpecies(){
+    return "Rotomon";
+}
+
 // -------DERIVED CLASS : ICE/WATER ENGIMONS ----------------
 string arr_icewater[] = {"Ice", "Water"};
 Skill g("Thick fat", 10, 1, 2, arr_icewater);
@@ -635,6 +661,9 @@ Element Sealmon :: getElemen(){
     return (this->elemen);
 }
 
+string Sealmon::getSpecies(){
+    return "Sealmon";
+}
 // -------DERIVED CLASS : WATER/GROUND ENGIMONS ----------------
 string arr_waterground [] = {"Water", "Ground"};
 Skill h("Sticky hold",10,1,2,arr_waterground);
@@ -702,4 +731,8 @@ int Gastromon::nbEl(){
 
 Element Gastromon :: getElemen(){
     return (this->elemen);
+}
+
+string Gastromon::getSpecies(){
+    return "Gastromon";
 }

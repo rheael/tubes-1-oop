@@ -44,12 +44,13 @@ class Engimon{
         bool isSkillFull();
         // virtual methods
         virtual void showData();
-        virtual void talk();
-        virtual bool punyaElemen(string);
-        virtual int nbEl();
-        virtual string getParent1Species();
-        virtual string getParent2Species();
-        virtual Element getElemen();
+        virtual void talk()=0;
+        virtual bool punyaElemen(string)=0;
+        virtual int nbEl()=0;
+        virtual string getParent1Species()=0;
+        virtual string getParent2Species()=0;
+        virtual Element getElemen()=0;
+        virtual string getSpecies()=0;
 };
 
 class Charmamon: public Engimon{
@@ -74,6 +75,7 @@ class Charmamon: public Engimon{
         void talk();
         bool punyaElemen(string);
         int nbEl();
+        string getSpecies();
 };
 
 class Squirtlmon: public Engimon{
@@ -98,6 +100,7 @@ class Squirtlmon: public Engimon{
         void talk();
         bool punyaElemen(string);
         int nbEl();
+        string getSpecies();
 };
 
 class Pikamon: public Engimon{
@@ -122,6 +125,7 @@ class Pikamon: public Engimon{
         void talk();
         bool punyaElemen(string);
         int nbEl();
+        string getSpecies();
 };
 
 class Rumblemon: public Engimon{
@@ -147,6 +151,7 @@ class Rumblemon: public Engimon{
         void talk();
         bool punyaElemen(string);
         int nbEl();
+        string getSpecies();
 };
 
 class Snommon: public Engimon{
@@ -172,6 +177,7 @@ class Snommon: public Engimon{
         void talk();
         bool punyaElemen(string);
         int nbEl();
+        string getSpecies();
 };
 
 class Rotomon: public Engimon{
@@ -198,6 +204,7 @@ class Rotomon: public Engimon{
         void talk();
         bool punyaElemen(string);
         int nbEl();
+        string getSpecies();
 };
 
 class Sealmon: public Engimon{
@@ -224,6 +231,7 @@ class Sealmon: public Engimon{
         void talk();
         bool punyaElemen(string);
         int nbEl();
+        string getSpecies();
 };
 
 class Gastromon: public Engimon{
@@ -250,4 +258,5 @@ class Gastromon: public Engimon{
         void talk();
         bool punyaElemen(string);
         int nbEl();
+        string getSpecies();
 };

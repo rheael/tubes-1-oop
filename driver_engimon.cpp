@@ -10,7 +10,8 @@ int main() {
     // UDAH BISA :D
     Skill *S1 = new Skill();
     C1->operator<<(*S1);
-    C1->showData();
+    string a = C1->getSpecies();
+    cout << a << endl;
 
     cout<<("----------------")<<endl;
 
