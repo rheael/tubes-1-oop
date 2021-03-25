@@ -155,37 +155,25 @@ void Player::learnSkill(Engimon *E, Skill *S) {
     }
 }
 
-/*
+
 void Player::battle(Engimon* musuh){
-    // Bandingkan power musuh dan power engimon player
-            
-    // POWER :
-    // level * element advantage
-    // SUM(every skill's base power * Mastery level)
-    // -------------------------- +
-
-   // level = atribut level dari kelas engimon
-   // element advantage = matriks dari kelas elemen
-   // skill's base power = atribut dari kelas skill
-   // mastery level = atribut dari kelas skill
-
-   // mungkin bikin fungsi sum(base power * mastery lv)
-   // print ascii keterangan menang/kalah
 
     Engimon* currentEngimon = getActiveEngimon();
     // find element advantage
-    float myElmAdvantage = GetAdv(currentEngimon,musuh);
-    float enmElmAdvantage = GetAdv(musuh,currentEngimon);
+    float myElmAdvantage = getAdvantage(currentEngimon,musuh);
+    float enmElmAdvantage = getAdvantage(musuh,currentEngimon);
 
     int myPower = currentEngimon->getLevel() * myElmAdvantage +
                 sumBasePowMastery(currentEngimon);
 
     int enemyPower = musuh->getLevel() * enmElmAdvantage +
                 sumBasePowMastery(musuh);
-
+    
+    cout << "mypower : " << myPower << "\nenmpower : " << enemyPower << endl;
+    
     if(myPower>enemyPower){
         // print ascii win message
-
+        cout << "menang" << endl;
         // active engimon menerima exp
         // asumsi besarannya 35
         currentEngimon->addExp(35);
@@ -196,24 +184,15 @@ void Player::battle(Engimon* musuh){
         // mendapatkan random skill kompatibel dengan elemen musuh
         // mungkin dibikin generateRandomSkill based on engimon's element
 
-    } else if (myPower==enemyPower){
-        // print ascii draw message
-        // klo seri ngapain ya?
-
-    } else{
+    } else {
         // print ascii lose message
-        
+        cout << "kalah" << endl;
         // engimon akan mati
         currentEngimon->die();
 
         // player bs pilih command kek biasa
     }
-
-    // BELUM NANGANIN KASUS MULTIPLE ELEMENT ENGIMON
-    // mungkin nanti dibikin method getAdvMultipleElmEngimon();
-    // ato jadiin method overloading buat engimon dgn multiple elm
-
-}*/
+}
 
 int Player::sumBasePowMastery(Engimon* E){
     int sum = 0;
@@ -257,7 +236,6 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
             // tipe charmamon
             Charmamon child(namaAnak, bapak->getName(), emak->getName());
             *child1 = child;
-            cout<< typeBapak << endl;
         } else if(typeBapak.find(Squirt) == std::string::npos){
             // tipe squirtmon
             Squirtlmon child(namaAnak, bapak->getName(), emak->getName());
