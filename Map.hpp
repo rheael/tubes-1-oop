@@ -32,11 +32,17 @@ class Map {
         Point getPosition(char);
         bool isAuthorized(int, int);
         void randomizeWildEngimonMove();
-        bool isGrassland(Engimon*);
+        bool isFire(Engimon*);
         bool isWater(Engimon*);
+        bool isIce(Engimon*);
+        bool isElectric(Engimon*);
+        bool isGrassland(Engimon*);
+        bool isSea(Engimon*);
+        bool isGround(Engimon*);
         bool isWildAuthorized(Engimon*, int, int);
         bool isLevelMoreThan(Engimon*,int);
         void capitalizeEngimon(Engimon*);
+        char engimonChara(Engimon*);
 };
 
 #endif

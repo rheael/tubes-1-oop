@@ -32,6 +32,7 @@ Map::Map() {
     }
 }
 
+
 void Map::displayMap() {
     cout << "--- MAP ---\n\n";
     for(int i=0;i<row;i++) {
@@ -169,7 +170,7 @@ void Map::randomizeWildEngimonMove() {
                 newRo=currentRo+i;
             }
             if(isWildAuthorized(e,newRo,newCol)) {
-                setMapCharaAt(newCol, newRo,'f'); // engimon type later, maybe store the chara in engimon
+                setMapCharaAt(newCol, newRo,engimonChara(e)); // engimon type later, maybe store the chara in engimon
                 setMapCharaAt(currentCol, currentRo,' ');
                 setMapWildEngiAt(newCol, newRo,e);
                 setMapWildEngiAt(currentCol, currentRo, NULL);
@@ -181,20 +182,57 @@ void Map::randomizeWildEngimonMove() {
 
 // if the wild engi is fire, ground, electric : only on grassland
 // if the wild engi is water / ice : only on sea
-
-bool Map::isGrassland(Engimon* e) {
-    return (e->punyaElemen("water")) && (e->punyaElemen("ice"));
+bool Map::isFire(Engimon* e) {
+    return (e->punyaElemen("fire")); 
 }
 
 bool Map::isWater(Engimon* e) {
-    return (e->punyaElemen("ground") && (e->punyaElemen("fire") && (e->punyaElemen("electric"))));
+    return (e->punyaElemen("water"));
+}
+
+bool Map::isIce(Engimon* e) {
+    return (e->punyaElemen("ice"));
+}
+
+bool Map::isElectric(Engimon* e) {
+    return (e->punyaElemen("electric"));
+}
+
+bool isGround(Engimon* e) {
+    return (e->punyaElemen("ground"));
+}
+
+bool Map::isGrassland(Engimon* e) {
+    return  isFire(e) || (isElectric(e)); // || (isGround(e));
+}
+
+bool Map::isSea(Engimon* e) {
+    return (isWater(e) || isIce(e));
+}
+
+char Map::engimonChara(Engimon* e) {
+    if(isWater(e)) {
+        return 'w';
+    }
+    if(isIce(e)) {
+        return 'i';
+    }
+    if(isFire(e)) {
+        return 'f';
+    }
+    if(isElectric(e)) {
+        return 'e';
+    }
+    /*if(isGround(e)) {
+        return 'g';
+    }*/
 }
 
 bool Map::isWildAuthorized(Engimon* e, int col, int ro) {
-    if(!isGrassland(e) && isWater(e)) {
+    if(!isGrassland(e) && isSea(e)) {
         return(isAuthorized(col,ro) && map[col][ro].getType()=='o'); 
     }
-    else if(isGrassland(e) && !isWater(e)) {
+    else if(isGrassland(e) && !isSea(e)) {
         return(isAuthorized(col,ro) && map[col][ro].getType()=='-');
     }
     else { // compatible for both
