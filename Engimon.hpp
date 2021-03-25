@@ -26,9 +26,6 @@ class Engimon{
         string getName();
         string getParent1Name();
         string getParent2Name();
-        virtual string getParent1Species();
-        virtual string getParent2Species();
-        virtual Element getElemen();
         void setName(string);
         int getLevel();
         Skill* getAbility();
@@ -41,13 +38,17 @@ class Engimon{
         void levelDown(int);
         void addExp(int);
         void die(); // --------------------ini apakah iya?
+        bool punyaSkill(Skill);
+        void addNewSkill(Skill);
+        bool isSkillFull();
+        // virtual methods
         virtual void showData();
         virtual void talk();
         virtual bool punyaElemen(string);
         virtual int nbEl();
-        bool punyaSkill(Skill);
-        void addNewSkill(Skill);
-        bool isSkillFull();
+        virtual string getParent1Species();
+        virtual string getParent2Species();
+        virtual Element getElemen();
 };
 
 class Charmamon: public Engimon{
@@ -250,7 +251,8 @@ class Gastromon: public Engimon{
         int nbEl();
 };
 
-// Template isinya getAdv Battle
+// Template isinya getAdv Battle 
+
 template <class T1, class T2>
 float GetAdv(T1 user, T2 enemy){
     float table[5][5];
@@ -329,11 +331,11 @@ float GetAdv(Engimon user, Engimon enemy){
     table[4][3]=2;
     table[4][4]=1;
     int jmla = user.nbEl();
-    int arr[jmla];
+    int arr[1]; // jmla masih error
     Element eluser = user.getElemen();
     eluser.getidxel(arr);
     int jmlb = enemy.nbEl();
-    int arr2[jmlb];
+    int arr2[1]; // jmlb masih error
     Element elenem = enemy.getElemen();
     elenem.getidxel(arr2);
     float maks = 0;

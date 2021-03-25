@@ -1,4 +1,6 @@
 #include "Engimon.hpp"
+#include "Skill.hpp"
+#include "Element.hpp"
 
 #include <iostream>
 #include <string>
@@ -38,8 +40,6 @@ Engimon::Engimon(string nama, string napar1, string napar2){
     this->numAbility = 0;
 }
 
-
-
 Engimon::Engimon(const Engimon& other){
     this->name = other.name;
     this->parent1name = other.parent1name;
@@ -55,8 +55,9 @@ Engimon::Engimon(const Engimon& other){
 }
 
 Engimon& Engimon::operator<<(const Skill& skil){
-    if (this->numAbility <= 4 && this->punyaSkill(skil)){
+    if (this->numAbility <= 4 && !this->punyaSkill(skil)){
         this->ability[numAbility] = skil;
+        this->numAbility = this->numAbility + 1;
     }
     return *this;
 }
@@ -85,10 +86,27 @@ Skill* Engimon::getSkill(){
     return this->ability;
 }
 
-//string Engimon::getParent1Species(){};
-//string Engimon::getParent2Species(){};
-//void Engimon::talk(){};
-//bool Engimon::punyaElemen(string){};
+// BUAT YANG VIRTUAL2
+string Engimon::getParent1Species(){
+    return "unknown";
+}
+string Engimon::getParent2Species(){
+    return "unknown";
+}
+void Engimon::talk(){
+    return;
+}
+bool Engimon::punyaElemen(string){
+    return false;
+}
+Element Engimon::getElemen(){
+    Element e;
+    return e;
+}
+int Engimon::nbEl(){
+    return 0;
+}
+//
 
 void Engimon::setName(string nama){
     this->name = nama;
@@ -122,8 +140,8 @@ void Engimon::showData(){
     cout << "Level: "<<this->level << endl;
     cout << "Exp: " << this->exp << endl;
     cout << "Cumulative Exp: "<<this->cumulativeExp << endl;
-    cout << "Skills: " ; 
-    for (int i = 0; i < 4; i++)
+    cout << "Skills: (" << this->numAbility << ")";
+    for (int i = 0; i < this->numAbility; i++)
     {
         if (i != 0) {
             cout << ", ";
