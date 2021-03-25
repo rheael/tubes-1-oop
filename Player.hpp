@@ -2,8 +2,6 @@
 #define __PLAYER_HPP__
 
 #include "Engimon.hpp"
-#include "Element.hpp"
-#include "Skill.hpp"
 #include "Point.hpp"
 #include "Inventory.hpp"
 #include "InventoryItem.hpp"
@@ -40,10 +38,12 @@ class Player {
         void learnSkill(Engimon* E, Skill* S);
         void battle(Engimon* musuh);
         int sumBasePowMastery(Engimon*);
-        Engimon& breedingSpesies(Engimon& bapak, Engimon& emak);
-        void inheritSkill(Engimon& bapak, Engimon& emak, Engimon& anak);
-        void breeding (Engimon& bapak, Engimon& emak);
-        Skill* getSkillbyMastery(Engimon&, Engimon&);
+        Engimon* breedingSpesies(Engimon* bapak, Engimon* emak);
+        void inheritSkill(Engimon* bapak, Engimon* emak, Engimon* anak);
+        void breeding (Engimon* bapak, Engimon* emak);
+        //void breeding (Engimon* bapak, Engimon* emak);
+        Skill* getSkillbyMastery(Engimon*, Engimon*);
+        float getAdvantage(Engimon*,Engimon*);
 };
 
 #endif

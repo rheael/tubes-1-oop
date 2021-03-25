@@ -1,6 +1,4 @@
 #include "Engimon.hpp"
-#include "Skill.hpp"
-#include "Element.hpp"
 
 #include <iostream>
 #include <string>
@@ -62,6 +60,19 @@ Engimon& Engimon::operator<<(const Skill& skil){
     return *this;
 }
 
+Engimon& Engimon::operator=(const Engimon& E){
+    this->name = E.name;
+    this->parent1name = E.parent1name;
+    this->parent2name = E.parent2name;
+    for (int i = 0; i < 4; i++){
+        this->ability[i] = E.ability[i];
+    }
+    this->numAbility = E.numAbility;
+    this->level = E.level;
+    this->exp = E.exp;
+    this->cumulativeExp = E.cumulativeExp;
+}
+
 Engimon::~Engimon(){
     delete [] this->ability;
 }
@@ -112,6 +123,10 @@ void Engimon::setName(string nama){
     this->name = nama;
 }
 
+void Engimon::setLevel(int n){
+    this->level = n;
+}
+
 void Engimon::levelUp(){
     while (this->exp > 100){
         this->level++;
@@ -137,6 +152,7 @@ void Engimon::die(){
 }
 
 void Engimon::showData(){
+    cout << "Nama: "<<this->name<<endl; 
     cout << "Level: "<<this->level << endl;
     cout << "Exp: " << this->exp << endl;
     cout << "Cumulative Exp: "<<this->cumulativeExp << endl;
