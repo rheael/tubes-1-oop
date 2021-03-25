@@ -15,11 +15,12 @@ public:
     Element(int, string[]);
     Element(const Element&);
     Element& operator=(const Element&);
-    friend bool operator==(const Element& e1, const Element& e2){;}
+    friend bool operator==(const Element& e1, const Element& e2);
     ~Element();
     int getjmlel();
     void getidxel(int[]);
     string getNameAtIdx(int idx);
+    bool isSama(Element);
 };
 
 #endif

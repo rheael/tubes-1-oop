@@ -102,17 +102,17 @@ string Element::getNameAtIdx(int idx) {
     return namael[idx];
 }
 
-bool operator==(Element& e1, Element& e2){
+bool Element::isSama(Element e2){
     bool sama = true;
-    if(e1.getjmlel()==e2.getjmlel()){
-        int n = e1.getjmlel();
+    if(this->getjmlel()==e2.getjmlel()){
+        int n = this->getjmlel();
         for(int i=0;i<n;i++){
             // cari yang ga sama
-            if(e1.getNameAtIdx(i)!=e2.getNameAtIdx(i)){
+            if(this->getNameAtIdx(i)!=e2.getNameAtIdx(i)){
                 sama = false;
                 break;
             }
         }
-    }
+    } else { sama = false; }
     return sama;
 }

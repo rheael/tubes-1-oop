@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include <string>
 
 Player::Player() {
     //Inisialisasi awal
@@ -220,7 +221,7 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
     string Roto = "Rotomon";
     string Seal = "Sealmon";
     string Gastro = "Gastromon";
-
+    
     // memberikan nama anak
     string namaAnak;
     cout << "Masukan nama buah hati dari " <<
@@ -236,8 +237,9 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
     // construct engimon baru (mesti nentuin elmnya dulu)
     // kasus i : elemen kedua parent sama
     // spesies & elm anak dipilih dari parent A atau B (pilih parent A)
-    if(bapak->getElemen()==emak->getElemen()){
+    if(bapak->getElemen().isSama(emak->getElemen())){
         // construct anak
+        cout << "case elemen sama" << endl;
         if (bapak->getSpecies()==Char){
             // tipe charmamon
             Charmamon *child = new Charmamon(namaAnak, bapak->getName(), emak->getName());
@@ -278,11 +280,13 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
     }
     else
     {
+        cout << "\ncase elemen beda" << endl;
         // kasus ii & iii : elemen kedua parent berbeda maka 
         // anak akan memiliki elemen dan spesies dari 
         // elemen yang memiliki element advantage yang lebih tinggi.
         
         if(advBapak>advEmak){
+            cout << "bapak lebih gede dr emak woy" << endl;
             //diambil punya bapak
             // construct anak
             if (bapak->getSpecies()==Char){
@@ -297,6 +301,7 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
                 // tipe squirtmon
                 Squirtlmon *child = new Squirtlmon(namaAnak, bapak->getName(), emak->getName());
                 child1 = child;
+                cout << "disini" << endl;
             } else if(bapak->getSpecies()==Pika){
                 // tipe pikamon
                 Pikamon *child = new Pikamon(namaAnak, bapak->getName(), emak->getName());
@@ -323,7 +328,10 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
                 child1 = child;
             }
             
-        } else if (advBapak < advEmak){
+        } else if(advBapak == advEmak){
+
+        } else { //bapak lebih kecil
+            cout << "emak lebih gede dr bapak woy" << endl;
             //diambil punya emak
             // construct anak
             if (emak->getSpecies()==Char){
@@ -363,7 +371,7 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
                 Gastromon *child = new Gastromon(namaAnak, bapak->getName(), emak->getName());
                 child1 = child;
             }
-        } else {
+        } /*else {
             // adv nya sama
             // construct anak
             if (typeBapak.find(Char) != std::string::npos &&
@@ -407,7 +415,7 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
                 Gastromon child(namaAnak, bapak->getName(), emak->getName());
                 *child1 = child;
             }
-        }
+        }*/
     }
     cout << child1->getSpecies() << endl;
 

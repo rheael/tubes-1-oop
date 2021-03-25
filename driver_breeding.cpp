@@ -6,7 +6,7 @@ using namespace std;
 int main(){
     Player*p = new Player();
     Charmamon*ch = new Charmamon();
-    Gastromon*ch1 = new Gastromon();
+    Charmamon*ch1 = new Charmamon();
     Squirtlmon*sq = new Squirtlmon();
     Squirtlmon*sq1 = new Squirtlmon();
     Rumblemon*r = new Rumblemon();
@@ -18,10 +18,15 @@ int main(){
     //Engimon a(*p->breedingSpesies(ch,ch1));
     //a.showData();
 
-    p->breeding(ch,sq);
+    p->breeding(ch,ch1);
     // udah work
     p->changeActiveEngimon();
     p->getActiveEngimon()->showData();
+
+    cout << "\n\n";
+    if(ch->getElemen().isSama(ch1->getElemen())){
+        cout << "sama jir" << endl;
+    } else { cout << "ga" << endl;}
 
     delete p;
     delete ch;
