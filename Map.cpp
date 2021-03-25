@@ -55,6 +55,10 @@ void Map::setMapCharaAt(int x, int y, char chara) {
     map[y][x].setChara(chara);
 }
 
+/*void Map::setMapWildEngiAt(int x, int y, Engimon* e) {
+    map[y][x].setWildEngimon(e);
+}*/
+
 char Map::getMapCharaAt(int x,int y) {
     return(map[y][x].getChara());
 }
@@ -63,7 +67,11 @@ char Map::getMapTypeAt(int x,int y) {
     return(map[y][x].getType());
 }
 
-void Map::spawnWildEngimon() {
+/*Engimon* Map::getMapWildEngiAt(int x, int y) {
+    return(map[y][x].getWildEngimon());
+}*/
+
+/*Engimon&*/ void Map::spawnWildEngimon() {
     // User will input max spawned Engimon, probably on main
     int i=rand();
     int j=rand();
@@ -75,21 +83,25 @@ void Map::spawnWildEngimon() {
         if(!map[newY][newX].isOccupied()) {
             if(map[newY][newX].getType()=='-') { // the type of tile
                 if(isAuthorized('f',newX,newY)) {
-                    Charmamon* wildEngi= new Charmamon("Wildcharm");
+                    Engimon* wildEngi = new Charmamon();
+                    // *wildEngi = Charmamon;
                     cout << "There comes charmamon!" << endl; 
                     setMapCharaAt(newX, newY, 'f');
+                    // setMapWildEngiAt(newX, newY,wildEngi);
                 }
             }
             else {
                 if(isAuthorized('i',newX,newY)) {
-                    Snommon* wildEngi = new Snommon("Wildsnom"); 
+                    Engimon* wildEngi = new Snommon();
+                    // *wildEngi = Snommon;
                     cout << "There comes snommon!" << endl;
                     setMapCharaAt(newX, newY, 'i');
+                    //setMapWildEngiAt(newX, newY,wildEngi);
                 }
             }
         }
     }
-
+    // return *wildEngi
 }
 
 void Map::getMove(string move, char chara) {
@@ -145,15 +157,31 @@ bool Map::isAuthorized(char chara, int col, int ro) {
 
 // throw exception(?) if wildengi and player goes to the same tile
 // dunno if its handled on the driver or here
-void Map::randomizeWildEngimonMove(char chara) {
-
+void Map::randomizeWildEngimonMove() {
+    /* int currentCol=rand()%12;
+    int currentRo=rand()%9;
+    // Engimon* e=getMapWildEngiAt(currentCol, currentRo); // could be null
+    int randomizer=rand();
+    if(e!=NULL) {
+        if(randomizer%5==0) {
+            //if(isWildAuthorized()) {
+                int i=rand()%(1-(-1)+1)+1;
+                setMapCharaAt(currentCol+i, currentRo+i,'E'); // engimon type later
+                setMapCharaAt(currentCol, currentRo,' ');
+                setMapWildEngiAt(currentCol+i, currentRo+i,e);
+                setMapWildEngiAt(currentCol, currentRo, NULL);
+            //}
+            cout << "the wild engimon has moved" << endl;
+        }
+    } */
 }
 
 // if the wild engi is fire, ground, electric : only on grassland
 // if the wild engi is water / ice : only on sea
-void Map::isWildAuthorized() {
+/* bool Map::isWildAuthorized(Engimon* e) {
+    // engimon type
+} */
 
-}
 
 /* 
 g++ map.cpp point.cpp driver_map.cpp engimon.cpp element.cpp skill.cpp -o drivermap1

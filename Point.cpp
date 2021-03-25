@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cctype>
+#include <cstring>
 #include "Point.hpp"
 
 using namespace std;
@@ -19,47 +20,47 @@ Point::Point() {
     this->chara=' ';
 }
 
-Point::Point(int x, int y, char t) {
-    this->x = x;
-    this->y = y;
-    if (t == '-' || t == 'o') {
-        this->type = t;
-        this->chara = ' ';
-    }
-    // Asumsi bahwa spawn Player dan Active Engimon pertama kali selalu di Grassland
-    else if (t == 'P' || toupper(t) == 'X') {
-        this->type = '-';
-        this->chara = t;
-    }
-    // Asumsi dia di Grassland pertama kali
-    else if (isBothEngimon(t) || isGrassEngimon(t)) {
-        this->type = '-';
-        this->chara = t;
-    }
-    else if (isSeaEngimon(t)) {
-        this->type = 'o';
-        this->chara = t;
-    }
-}
+// Point::Point(int x, int y, char t) {
+//     this->x = x;
+//     this->y = y;
+//     if (t == '-' || t == 'o') {
+//         this->type = t;
+//         this->chara = ' ';
+//     }
+//     // Asumsi bahwa spawn Player dan Active Engimon pertama kali selalu di Grassland
+//     else if (t == 'P' || toupper(t) == 'X') {
+//         this->type = '-';
+//         this->chara = t;
+//     }
+//     // Asumsi dia di Grassland pertama kali
+//     else if (isBothEngimon() || isGrassEngimon()) {
+//         this->type = '-';
+//         this->chara = t;
+//     }
+//     else if (isSeaEngimon()) {
+//         this->type = 'o';
+//         this->chara = t;
+//     }
+// }
 
-Point::Point(const Point& other) {
-    this->x = other.x;
-    this->y = other.y;
-    this->type = other.type;
-    this->chara = other.chara;
-}
+// Point::Point(const Point& other) {
+//     this->x = other.x;
+//     this->y = other.y;
+//     this->type = other.type;
+//     this->chara = other.chara;
+// }
 
 /*Point::~Point() {
     cout << "Point (" << this->x << "," << this->y << ") destroyed" << endl;
 }*/
 
-Point& Point::operator=(const Point& other) {
-    this->x = other.x;
-    this->y = other.y;
-    this->type = other.type;
-    this->chara = other.chara;
-    return *this;
-}
+// Point& Point::operator=(const Point& other) {
+//     this->x = other.x;
+//     this->y = other.y;
+//     this->type = other.type;
+//     this->chara = other.chara;
+//     return *this;
+// }
 
 
 // Getter
@@ -79,6 +80,9 @@ char Point::getChara() const {
     return this->chara;
 }
 
+/*Engimon* Point::getWildEngimon() const {
+    return this->WildEngimonPtr;
+} */
 
 // Setter
 void Point::setX(int x) {
@@ -98,6 +102,10 @@ void Point::setChara(char c) {
     this->chara = c;
 }
 
+/* void Point::setWildEngimon(Engimon* e) {
+    this->WildEngimonPtr=e;
+}*/
+
 
 // Boolean function
 bool Point::isMember(const char arr[], char t, int size) {
@@ -108,6 +116,7 @@ bool Point::isMember(const char arr[], char t, int size) {
         if (arr[i] == t) {
             found = true;
         }
+        i++;
     }
     return found;
 }
@@ -132,14 +141,14 @@ bool Point::isLowLevel() {
     return isMember(low,this->chara,9);
 }
 
-bool Point::isGrassEngimon(char t) {
-    return isMember(grass,toupper(t),5);
+bool Point::isGrassEngimon() {
+    return isMember(grass,toupper(this->chara),5);
 }
 
-bool Point::isSeaEngimon(char t) {
-    return isMember(sea,toupper(t),3);
+bool Point::isSeaEngimon() {
+    return isMember(sea,toupper(this->chara),3);
 }
 
-bool Point::isBothEngimon(char t) {
-    return isGrassEngimon(t) && isSeaEngimon(t);
+bool Point::isBothEngimon() {
+    return isGrassEngimon() && isSeaEngimon();
 }

@@ -2,8 +2,9 @@
 
 #ifndef _POINT_HPP_
 #define _POINT_HPP_
-
+// #include "Engimon.hpp"
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -17,25 +18,28 @@ private:
     static const char low[]; // Array simbol huruf kecil
     static const char grass[]; // Array simbol engimon grass
     static const char sea[]; // Array simbol engimon sea
+    // Engimon* WildEngimonPtr; // Menyimpan data wild engimon yang ada di situ, not solved yet
 public:
     // Ctor, cctor, dtor, operator assignment (Kayaknya yang perlu cuma ctor)
     Point();
-    Point(int x, int y, char t);
-    Point(const Point& other);
+    //Point(int x, int y, char t);
+    //Point(const Point& other);
     //~Point();
-    Point& operator=(const Point& other);
+    //Point& operator=(const Point& other);
 
     // Getter
     int getX() const;
     int getY() const;
     char getType() const;
     char getChara() const;
+    /* Engimon* getWildEngimon() const; */
 
     // Setter
     void setX(int x);
     void setY(int y);
     void setType(char t); // Kayaknya gaperlu, tipe tile gabisa berubah2 kan?
     void setChara(char c);
+    /*void setWildEngimon(Engimon* e);*/
 
     // Boolean function
     bool isMember(const char arr[], char t, int size); // Mengembalikan true jika t merupakan anggota dari array of char arr
@@ -44,9 +48,9 @@ public:
     bool isSea(); // Mengembalikan true jika tile berjenis Sea
     bool isHighLevel(); // Mengembalikan true jika Engimon yang menempati tile berlevel tinggi
     bool isLowLevel(); // Mengembalikan true jika Engimon yang menempati tile berlevel rendah
-    bool isGrassEngimon(char t); // Mengembalikan true jika Engimon yang menempati tile merupakan Grass Engimon
-    bool isSeaEngimon(char t); // Mengembalikan true jika Engimon yang menempati tile merupakan Sea Engimon
-    bool isBothEngimon(char t); // Mengembalikan true jika Engimon yang menempati tile merupakan Water/Ground Engimon
+    bool isGrassEngimon(); // Mengembalikan true jika Engimon yang menempati tile merupakan Grass Engimon
+    bool isSeaEngimon(); // Mengembalikan true jika Engimon yang menempati tile merupakan Sea Engimon
+    bool isBothEngimon(); // Mengembalikan true jika Engimon yang menempati tile merupakan Water/Ground Engimon
 };
 
 #endif

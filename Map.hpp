@@ -24,14 +24,16 @@ class Map {
         void setMap();
         void displayMap();
         void setMapCharaAt(int,int,char);
+        // void setMapWildEngiAt(int, int, Engimon*);
         char getMapCharaAt(int,int);
+        // Engimon* getMapWildEngiAt(int, int);
         char getMapTypeAt(int,int);
         void spawnWildEngimon();
         void getMove(string,char);
         Point getPosition(char);
         bool isAuthorized(char, int, int);
-        void randomizeWildEngimonMove(char);
-        void isWildAuthorized();
+        void randomizeWildEngimonMove();
+        // bool isWildAuthorized(Engimon*);
 };
 
 #endif
