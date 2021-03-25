@@ -39,10 +39,14 @@ class Map {
         bool isGrassland(Engimon*);
         bool isSea(Engimon*);
         bool isGround(Engimon*);
+        bool isFireElectric(Engimon*);
+        bool isWaterIce(Engimon*);
+        bool isWaterGround(Engimon*);
         bool isWildAuthorized(Engimon*, int, int);
         bool isLevelMoreThan(Engimon*,int);
         void capitalizeEngimon(Engimon*);
         char engimonChara(Engimon*);
+        void upperCase(Engimon*,int,int);
 };
 
 #endif

@@ -25,9 +25,6 @@ Map::Map() {
             else {
                 map[i][j].setType('o');
             }
-            if(ch!='-' && ch!='o') {
-                map[i][j].setChara(ch);
-            }
         }
     }
 }
@@ -77,26 +74,45 @@ Engimon* Map::getMapWildEngiAt(int x, int y) {
     if((i+j)%7==0) {
         int newX=i%12;
         int newY=j%9;
+        Engimon* wildEngi=NULL;
         if(!map[newY][newX].isOccupied()) {
-            if(map[newY][newX].getType()=='-') { // the type of tile
-                if(isAuthorized(newX,newY)) {
-                    Engimon* wildEngi = new Charmamon();
-                    cout << "There comes charmamon!" << endl; 
-                    setMapCharaAt(newX, newY, 'f');
-                    setMapWildEngiAt(newX, newY,wildEngi);
+            if(isAuthorized(newX,newY)) {
+                if(map[newY][newX].getType()=='-') { // the type of tile
+                    if(i%2==0 && !i%3==0 && !i%5==0 && !i%7==0 && !i%13==0) {
+                        wildEngi = new Charmamon();
+                    }
+                    if(i%3==0 && !i%5==0 && !i%7==0 && !i%13==0) {
+                        wildEngi = new Pikamon(); // electric
+                    }
+                    if(i%5==0 && !i%7==0 && !i%13==0) {
+                        wildEngi = new Rumblemon(); // ground
+                    }
+                    if(i%7==0 && !i%13==0) {
+                        wildEngi = new Rotomon(); // fire and electric
+                    }
+                    if(i%13==0) {
+                        wildEngi = new Gastromon(); //water, ground
+                    }
                 }
-            }
-            else {
-                if(isAuthorized(newX,newY)) {
-                    Engimon* wildEngi = new Snommon();
-                    cout << "There comes snommon!" << endl;
-                    setMapCharaAt(newX, newY, 'i');
+                else {
+                    if(i%2==0 && !i%3==0) {
+                        wildEngi = new Snommon(); // ice
+                    }
+                    if(i%3==0) {
+                        wildEngi = new Squirtlmon(); // water
+                    }
+                    if(i%5==0) {
+                        wildEngi = new Sealmon(); //ice, water
+                    }
+                }
+                if(wildEngi!=NULL) {
+                    cout << "There comes " << wildEngi->getSpecies() << endl;
+                    setMapCharaAt(newX, newY, engimonChara(wildEngi));
                     setMapWildEngiAt(newX, newY,wildEngi);
                 }
             }
         }
     }
-    // return *wildEngi
 }
 
 void Map::getMove(string move, char chara) {
@@ -175,7 +191,7 @@ void Map::randomizeWildEngimonMove() {
                 setMapWildEngiAt(newCol, newRo,e);
                 setMapWildEngiAt(currentCol, currentRo, NULL);
             }
-                cout << "the wild engimon has moved" << endl;
+                cout << "The wild engimon" << e->getName() << "has moved" << endl;
         }
     }
 }
@@ -183,49 +199,72 @@ void Map::randomizeWildEngimonMove() {
 // if the wild engi is fire, ground, electric : only on grassland
 // if the wild engi is water / ice : only on sea
 bool Map::isFire(Engimon* e) {
-    return (e->punyaElemen("fire")); 
+    return (e->punyaElemen("Fire")); 
 }
 
 bool Map::isWater(Engimon* e) {
-    return (e->punyaElemen("water"));
+    return (e->punyaElemen("Water"));
 }
 
 bool Map::isIce(Engimon* e) {
-    return (e->punyaElemen("ice"));
+    return (e->punyaElemen("Ice"));
 }
 
 bool Map::isElectric(Engimon* e) {
-    return (e->punyaElemen("electric"));
+    return (e->punyaElemen("Electric"));
 }
 
-bool isGround(Engimon* e) {
-    return (e->punyaElemen("ground"));
+bool Map::isGround(Engimon* e) {
+    return (e->punyaElemen("Ground"));
+}
+
+bool Map::isFireElectric(Engimon* e) {
+    return(isFire(e) && isElectric(e));
+}
+
+bool Map::isWaterIce(Engimon* e) {
+    return(isWater(e) && isIce(e));
+}
+
+bool Map::isWaterGround(Engimon* e) {
+    return(isWater(e) && isGround(e));
 }
 
 bool Map::isGrassland(Engimon* e) {
-    return  isFire(e) || (isElectric(e)); // || (isGround(e));
+    return  isFire(e) || (isElectric(e)) || (isGround(e)) || (isFireElectric(e)) || (isWaterGround(e));
 }
 
 bool Map::isSea(Engimon* e) {
-    return (isWater(e) || isIce(e));
+    return (isWater(e) || isIce(e)) || (isWaterIce(e)) || (isWaterGround(e));
 }
 
 char Map::engimonChara(Engimon* e) {
-    if(isWater(e)) {
-        return 'w';
+    if(isWaterIce(e)) {
+        return 's';   
     }
-    if(isIce(e)) {
-        return 'i';
+    if(isFireElectric(e)) {
+        return 'l';
     }
-    if(isFire(e)) {
-        return 'f';
+    if(isWaterGround(e)) {
+        return 'n';
     }
-    if(isElectric(e)) {
-        return 'e';
+    else {
+        if(isWater(e)) {
+            return 'w';
+        }
+        if(isGround(e)) {
+            return 'g';
+        }
+        if(isFire(e)) {
+            return 'f';
+        }
+        if(isIce(e)) {
+            return 'i';
+        }
+        if(isElectric(e)) {
+            return 'e';
+        }
     }
-    /*if(isGround(e)) {
-        return 'g';
-    }*/
 }
 
 bool Map::isWildAuthorized(Engimon* e, int col, int ro) {
@@ -242,6 +281,12 @@ bool Map::isWildAuthorized(Engimon* e, int col, int ro) {
 
 bool Map::isLevelMoreThan(Engimon* e,int level) {
     return(e->getLevel()>level);
+}
+
+void Map::upperCase(Engimon *e, int col, int ro) {
+    if(isLevelMoreThan(e,10)) { // the level is merely an example
+        setMapCharaAt(col,ro,toupper(engimonChara(e)));
+    }
 }
 
 // when engimon levels up, maybe just check whether it has gone to a level
