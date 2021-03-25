@@ -18,6 +18,7 @@ Point::Point() {
     this->y=0;
     this->type=' ';
     this->chara=' ';
+    this->WildEngimonPtr=NULL;
 }
 
 // Point::Point(int x, int y, char t) {
