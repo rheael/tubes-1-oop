@@ -27,5 +27,10 @@ int main() {
     daftarEngimon[0] = &C1;
     daftarEngimon[0]->showData();
 
+    string arr [] = {"Fire","Ground"};
+    Skill a("Lava",10,1,1,arr);
+    C1 << a;
+    C1.showData();
+
     return 0;
 }

@@ -100,7 +100,6 @@ Skill* Engimon::getSkill(){
 }
 
 // BUAT YANG VIRTUAL2 
-/*
 string Engimon::getParent1Species(){
     return "unknown";
 }
@@ -125,7 +124,6 @@ Element Engimon::getElemen(){
 int Engimon::nbEl(){
     return 0;
 }
-*/
 
 void Engimon::setName(string nama){
     this->name = nama;
