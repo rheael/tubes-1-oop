@@ -394,27 +394,29 @@ void Player::inheritSkill(Engimon* bapak, Engimon* emak, Engimon* anak){
     Skill* skillAnak = new Skill();
 
     // selama skill belum full
-    while(!anak->isSkillFull()){
-        // jika skill dimiliki kedua parent
-        if(getSkillbyMastery(bapak,anak)->getnama()==getSkillbyMastery(emak,anak)->getnama()){
-            if(getSkillbyMastery(bapak,anak)->getMasteryLevel() > 
-            getSkillbyMastery(emak,anak)->getMasteryLevel()){
-                anak->operator<<(*getSkillbyMastery(bapak,anak));
-            } else if(getSkillbyMastery(bapak,anak)->getMasteryLevel() < 
-            getSkillbyMastery(emak,anak)->getMasteryLevel()){
-                anak->operator<<(*getSkillbyMastery(emak,anak));
-            } else { // mastery level sama
-                Skill* temp = new Skill();
-                temp = getSkillbyMastery(bapak,anak);
-                temp->incrementMasteryLevel();
-                anak->operator<<(*temp);
-            }
-        } else{ // skill beda
-            if(getSkillbyMastery(bapak,anak)->getMasteryLevel() >= 
-            getSkillbyMastery(emak,anak)->getMasteryLevel()){
-                anak->operator<<(*getSkillbyMastery(bapak,anak));
-            } else{
-                anak->operator<<(*getSkillbyMastery(emak,anak));
+    if(bapak->getSpecies()!=emak->getSpecies()){
+        while(!anak->isSkillFull()){
+            // jika skill dimiliki kedua parent
+            if(getSkillbyMastery(bapak,anak)->getnama()==getSkillbyMastery(emak,anak)->getnama()){
+                if(getSkillbyMastery(bapak,anak)->getMasteryLevel() > 
+                getSkillbyMastery(emak,anak)->getMasteryLevel()){
+                    anak->operator<<(*getSkillbyMastery(bapak,anak));
+                } else if(getSkillbyMastery(bapak,anak)->getMasteryLevel() < 
+                getSkillbyMastery(emak,anak)->getMasteryLevel()){
+                    anak->operator<<(*getSkillbyMastery(emak,anak));
+                } else { // mastery level sama
+                    Skill* temp = new Skill();
+                    temp = getSkillbyMastery(bapak,anak);
+                    temp->incrementMasteryLevel();
+                    anak->operator<<(*temp);
+                }
+            } else{ // skill beda
+                if(getSkillbyMastery(bapak,anak)->getMasteryLevel() >= 
+                getSkillbyMastery(emak,anak)->getMasteryLevel()){
+                    anak->operator<<(*getSkillbyMastery(bapak,anak));
+                } else{
+                    anak->operator<<(*getSkillbyMastery(emak,anak));
+                }
             }
         }
     }

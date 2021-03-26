@@ -25,7 +25,7 @@ int main(){
     Skill a("Silat",10,1,1,arr_fire);
     g->operator<<(a);
 
-    p->breeding(g,r);
+    p->breeding(ch,ch1);
     // udah work
     p->changeActiveEngimon();
     p->getActiveEngimon()->showData();
