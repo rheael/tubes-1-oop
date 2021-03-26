@@ -1,7 +1,7 @@
 #ifndef __PLAYER_HPP__
 #define __PLAYER_HPP__
 
-//#include "Engimon.hpp"
+// #include "Engimon.hpp"
 #include "Point.hpp"
 #include "Inventory.hpp"
 #include "InventoryItem.hpp"
@@ -36,7 +36,7 @@ class Player {
         void displayInventorySkill();
         void displayInventoryEngimon();
         void learnSkill(Engimon* E, Skill* S);
-        void battle(Engimon* musuh);
+        bool battle(Engimon* musuh);
         int sumBasePowMastery(Engimon*);
         Engimon* breedingSpesies(Engimon* bapak, Engimon* emak);
         void inheritSkill(Engimon* bapak, Engimon* emak, Engimon* anak);
@@ -47,6 +47,8 @@ class Player {
         Engimon* generateRandomChild(string namaAnak, string namaBapak, string namaEmak);
         void printAsciiKalah();
         void printAsciiMenang();
+        Skill* getSkillAt(int n);
+        Engimon* getEngimonAt(int n);
 };
 
 #endif

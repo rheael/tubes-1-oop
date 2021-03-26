@@ -8,6 +8,7 @@
 Map::Map() {
     char ch;
     Point** newmap=new Point*[row];
+    countEngimon = 0;
     for (int i = 0; i < row; i++){
         newmap[i] = new Point[column];
     }
@@ -67,52 +68,68 @@ Engimon* Map::getMapWildEngiAt(int x, int y) {
 
 /*Engimon&*/ void Map::spawnWildEngimon() {
     // User will input max spawned Engimon, probably on main
-    int i=rand();
-    int j=rand();
+    int i=(rand() % 12) + 1;
+    int j=(rand() % 9) + 1;
     // randomize the x and y first, if it is modulo something then spawn
-    // after that, the tile used will be (i%12 and j%9) 
-    if((i+j)%7==0) {
-        int newX=i%12;
-        int newY=j%9;
+    // after that, the tile )used will be (i%12 and j%9) 
+    // if((i+j)%7==0) {
+        int newX=i;
+        int newY=j;
         Engimon* wildEngi=NULL;
         if(!map[newY][newX].isOccupied()) {
             if(isAuthorized(newX,newY)) {
+                // Add level randomizer, 
+                int newLevel = (rand() % 20) + 1;
                 if(map[newY][newX].getType()=='-') { // the type of tile
                     if(i%2==0 && !i%3==0 && !i%5==0 && !i%7==0 && !i%13==0) {
                         wildEngi = new Charmamon();
+                        wildEngi->setLevel(newLevel);
                     }
                     if(i%3==0 && !i%5==0 && !i%7==0 && !i%13==0) {
                         wildEngi = new Pikamon(); // electric
+                        wildEngi->setLevel(newLevel);
                     }
                     if(i%5==0 && !i%7==0 && !i%13==0) {
                         wildEngi = new Rumblemon(); // ground
+                        wildEngi->setLevel(newLevel);
                     }
                     if(i%7==0 && !i%13==0) {
                         wildEngi = new Rotomon(); // fire and electric
+                        wildEngi->setLevel(newLevel);
                     }
                     if(i%13==0) {
                         wildEngi = new Gastromon(); //water, ground
+                        wildEngi->setLevel(newLevel);
                     }
                 }
                 else {
                     if(i%2==0 && !i%3==0) {
                         wildEngi = new Snommon(); // ice
+                        wildEngi->setLevel(newLevel);
                     }
                     if(i%3==0) {
                         wildEngi = new Squirtlmon(); // water
+                        wildEngi->setLevel(newLevel);
                     }
                     if(i%5==0) {
                         wildEngi = new Sealmon(); //ice, water
+                        wildEngi->setLevel(newLevel);
                     }
                 }
                 if(wildEngi!=NULL) {
                     cout << "There comes " << wildEngi->getSpecies() << endl;
-                    setMapCharaAt(newX, newY, engimonChara(wildEngi));
+                    if (newLevel > 10) {
+                        upperCase(wildEngi, newX, newY);
+                    }
+                    else {
+                        setMapCharaAt(newX, newY, engimonChara(wildEngi));
+                    }
                     setMapWildEngiAt(newX, newY,wildEngi);
+                    countEngimon++;
                 }
             }
         }
-    }
+    // }
 }
 
 void Map::getMove(string move, char chara) {
@@ -121,6 +138,9 @@ void Map::getMove(string move, char chara) {
     // doesnt get called when the movement throws an exception
     int x=getPosition(chara).getX();
     int y=getPosition(chara).getY();
+    int xEngi = getPosition('X').getX();
+    int yEngi = getPosition('X').getY();
+    Engimon* e = getMapWildEngiAt(xEngi,yEngi);
     int newX,newY;
     if(move=="w") {
         newX=x;
@@ -140,7 +160,10 @@ void Map::getMove(string move, char chara) {
     }
     if(isAuthorized(newX,newY) && (!map[newY][newX].isOccupied())) {
         setMapCharaAt(newX,newY,chara);
-        setMapCharaAt(x,y,' ');
+        setMapCharaAt(xEngi,yEngi,' ');
+        setMapCharaAt(x,y,'X');
+        setMapWildEngiAt(x,y,e);
+        setMapWildEngiAt(xEngi, yEngi, NULL);
     }
     else {
         throw(0);
@@ -191,7 +214,7 @@ void Map::randomizeWildEngimonMove() {
                 setMapWildEngiAt(newCol, newRo,e);
                 setMapWildEngiAt(currentCol, currentRo, NULL);
             }
-                cout << "The wild engimon" << e->getName() << "has moved" << endl;
+                cout << "The wild engimon " << e->getSpecies() << " has moved" << endl;
         }
     }
 }
@@ -239,30 +262,60 @@ bool Map::isSea(Engimon* e) {
 }
 
 char Map::engimonChara(Engimon* e) {
-    if(isWaterIce(e)) {
-        return 's';   
-    }
-    if(isFireElectric(e)) {
-        return 'l';
-    }
-    if(isWaterGround(e)) {
-        return 'n';
+    if (isLevelMoreThan(e,10)) {
+        if(isWaterIce(e)) {
+            return 'S';   
+        }
+        if(isFireElectric(e)) {
+            return 'L';
+        }
+        if(isWaterGround(e)) {
+            return 'N';
+        }
+        else {
+            if(isWater(e)) {
+                return 'W';
+            }
+            if(isGround(e)) {
+                return 'G';
+            }
+            if(isFire(e)) {
+                return 'F';
+            }
+            if(isIce(e)) {
+                return 'I';
+            }
+            if(isElectric(e)) {
+                return 'E';
+            }
+        }
     }
     else {
-        if(isWater(e)) {
-            return 'w';
+        if(isWaterIce(e)) {
+            return 's';   
         }
-        if(isGround(e)) {
-            return 'g';
+        if(isFireElectric(e)) {
+            return 'l';
         }
-        if(isFire(e)) {
-            return 'f';
+        if(isWaterGround(e)) {
+            return 'n';
         }
-        if(isIce(e)) {
-            return 'i';
-        }
-        if(isElectric(e)) {
-            return 'e';
+        else {
+            if(isWater(e)) {
+                return 'w';
+            }
+            if(isGround(e)) {
+                return 'g';
+            }
+            if(isFire(e)) {
+                return 'f';
+            }
+            if(isIce(e)) {
+                return 'i';
+            }
+            if(isElectric(e)) {
+                return 'e';
+            }
         }
     }
 }
@@ -288,6 +341,74 @@ void Map::upperCase(Engimon *e, int col, int ro) {
         setMapCharaAt(col,ro,toupper(engimonChara(e)));
     }
 }
+
+int Map::getCountEngimon() {
+    return countEngimon;
+}
+
+void Map::decrementCountEngimon() {
+    countEngimon--;
+}
+
+// Point Map::getEnemy() {
+//     int x=getPosition('P').getX();
+//     int y=getPosition('P').getY();
+    // if (loc == "w") {
+    //     p = map[x][y+1];
+    // }
+    // if (loc == "a") {
+    //     p = map[x-1][y];
+    // }
+    // if (loc == "s") {
+    //     p = map[x][y-1];
+    // }
+    // if (loc == "d") {
+    //     p = map[x+1][y];
+    // }
+    // int xActEngi = getPosition('X').getX();
+    // int yActEngi = getPosition('X').getY();
+    // if (isAuthorized(x+1,y) && (x+1 != xActEngi && y != yActEngi)) {
+    //     cout << "Here" << endl;
+    //     if (getMapWildEngiAt(x+1,y) != NULL) {
+    //         return map[y][x+1];
+    //     }
+    // }
+    // else if (isAuthorized(x-1,y) && (x-1 != xActEngi && y != yActEngi)) {
+    //     if (getMapWildEngiAt(x-1,y) != NULL) {
+    //         return map[y][x-1];
+    //     }
+    // }
+    // else if (isAuthorized(x,y+1) && (x != xActEngi && y+1 != yActEngi)) {
+    //     if (getMapWildEngiAt(x,y+1) != NULL) {
+    //         return map[y+1][x];
+    //     }
+    // }
+    // else if (isAuthorized(x,y-1) && (x != xActEngi && y-1 != yActEngi)) {
+    //     if (getMapWildEngiAt(x,y-1) != NULL) {
+    //         return map[y-1][x];
+    //     }
+    // }
+    // else {
+    //     Point p = Point();
+    //     p.setX(-1);
+    //     p.setY(-1);
+    //     return p;
+    // }
+// }
+
+// int Map::getEnemyX() {
+//     int x=getPosition('P').getX();
+//     int xActEngi = getPosition('X').getX();
+// }
+
+// int Map::getEnemyY() {
+//     int y=getPosition('P').getY();
+//     int yActEngi = getPosition('X').getY();
+// }
+
+// int Map::getEnemy() {
+    
+// }
 
 // when engimon levels up, maybe just check whether it has gone to a level
 // where it can be capitalized or not

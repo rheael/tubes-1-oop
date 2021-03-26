@@ -16,8 +16,11 @@ Player::Player() {
 
     //Inisialisasi inventory engimon
     Charmamon *C = new Charmamon("Charmamon");
+    C->setLevel(30);
     Pikamon *P = new Pikamon("Pikamon");
+    P->setLevel(30);
     Rotomon *R = new Rotomon("Rotomon");
+    R->setLevel(1);
     addEngimonToInventory(C);
     addEngimonToInventory(P);
     addEngimonToInventory(R);
@@ -77,6 +80,8 @@ void Player::changeActiveEngimon() {
     cout << "Pilih nomor engimon yang ingin diaktifkan: ";
     cin >> idx;
     activeEngimon = InventoryEngimon->getItemAtIdx(idx-1).getItem();
+    activeEngimon->talk();
+    cout << "Now " << activeEngimon->getName() << " is the Active Engimon!" << endl;
 }
 
 void Player::interactActiveEngimon() {
@@ -150,6 +155,7 @@ void Player::learnSkill(Engimon *E, Skill *S) {
         } else {
             E->addNewSkill(valueS);
             deleteSkillFromIventory(S);
+            cout << E->getName() << " learned a new skill!" << endl;
         }
         //Cek apakah udh punya 4, kl penuh print "Engimon ini sudah memiliki 4 skill"
         //Kalo belum 4, skill engimon bertambah
@@ -157,7 +163,7 @@ void Player::learnSkill(Engimon *E, Skill *S) {
 }
 
 
-void Player::battle(Engimon* musuh){
+bool Player::battle(Engimon* musuh){
 
     Engimon* currentEngimon = getActiveEngimon();
     // find element advantage
@@ -177,12 +183,13 @@ void Player::battle(Engimon* musuh){
         // active engimon menerima exp
         // asumsi besarannya 35
         currentEngimon->addExp(35);
-        
+
         // mendapatkan engimon lawan
         addEngimonToInventory(musuh);
         
         // mendapatkan random skill kompatibel dengan elemen musuh
         addSkillToInventory(&musuh->getAbility()[0]);
+        return true;
 
     } else {
         // print ascii lose message
@@ -194,6 +201,7 @@ void Player::battle(Engimon* musuh){
         deleteEngimonFromInventory(currentEngimon);
         changeActiveEngimon();
         // player bs pilih command kek biasa
+        return false;
     }
 }
 
@@ -230,7 +238,7 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
     
     float advBapak = getAdvantage(bapak,emak);
     float advEmak = getAdvantage(emak,bapak);
-    cout << "\nbapak : " << advBapak << "\nemak : " << advEmak << "\n\n";
+    // cout << "\nbapak : " << advBapak << "\nemak : " << advEmak << "\n\n";
 
     Engimon* child1 = new Engimon();
     // construct engimon baru (mesti nentuin elmnya dulu)
@@ -238,7 +246,7 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
     // spesies & elm anak dipilih dari parent A atau B (pilih parent A)
     if(bapak->getElemen().isSama(emak->getElemen())){
         // construct anak
-        cout << "case elemen sama" << endl;
+        // cout << "case elemen sama" << endl;
         if (bapak->getSpecies()==Char){
             // tipe charmamon
             Charmamon *child = new Charmamon(namaAnak, bapak->getName(), emak->getName());
@@ -279,13 +287,13 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
     }
     else
     {
-        cout << "\ncase elemen beda" << endl;
+        // cout << "\ncase elemen beda" << endl;
         // kasus ii & iii : elemen kedua parent berbeda maka 
         // anak akan memiliki elemen dan spesies dari 
         // elemen yang memiliki element advantage yang lebih tinggi.
         
         if(advBapak>advEmak){
-            cout << "bapak lebih gede dr emak woy" << endl;
+            // cout << "bapak lebih gede dr emak woy" << endl;
             //diambil punya bapak
             // construct anak
             if (bapak->getSpecies()==Char){
@@ -328,7 +336,7 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
             }
             
         } else if (advBapak<advEmak) { //bapak lebih kecil
-            cout << "emak lebih gede dr bapak woy" << endl;
+            // cout << "emak lebih gede dr bapak woy" << endl;
             if (emak->getSpecies()==Char){
                 // tipe charmamon
                 Charmamon *child = new Charmamon(namaAnak, bapak->getName(), emak->getName());
@@ -369,14 +377,14 @@ Engimon* Player::breedingSpesies(Engimon* bapak, Engimon* emak){
         } else {
             // adv nya sama
             // construct anak yang beda dari parent
-            cout << "case adv sama" << endl;
+            // cout << "case adv sama" << endl;
             child1 = generateRandomChild(namaAnak,bapak->getName(),emak->getName());
             while(child1->getSpecies()==bapak->getSpecies() || child1->getSpecies()==emak->getSpecies()){
                 child1 = generateRandomChild(namaAnak,bapak->getName(),emak->getName());
             }
         }
     }
-    cout << child1->getSpecies() << endl;
+    // cout << child1->getSpecies() << endl;
 
     return child1;
 }
@@ -419,6 +427,8 @@ void Player::breeding(Engimon* bapak, Engimon* emak) {
         anak = breedingSpesies(bapak,emak);
         inheritSkill(bapak,emak,anak);
         addEngimonToInventory(anak);
+        cout << "Congratulations!!! You get new " << anak->getSpecies() << endl;
+        cout << anak->getName() << " added to inventory" << endl;
     }
     else
     {
@@ -557,4 +567,12 @@ void Player::printAsciiMenang(){
     cout << "     ' _...-|     |-..._ '" << endl;
     cout << "            |     |" << endl;
     cout << "            '.___.'" << endl;
+}
+
+Skill* Player::getSkillAt(int n) {
+    return InventorySkill->getItemAtIdx(n).getItem();
+}
+
+Engimon* Player::getEngimonAt(int n) {
+    return InventoryEngimon->getItemAtIdx(n).getItem();
 }

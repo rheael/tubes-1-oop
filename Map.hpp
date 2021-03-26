@@ -15,6 +15,7 @@ class Map {
         const static int row=9;
         const static int column=12;
         // const static int limitSpawn user-defined;
+        int countEngimon;
         Point** map;
         /*char* filename;*/
     public:
@@ -47,6 +48,11 @@ class Map {
         void capitalizeEngimon(Engimon*);
         char engimonChara(Engimon*);
         void upperCase(Engimon*,int,int);
+        int getCountEngimon();
+        void decrementCountEngimon();
+        // Point getEnemy();
+        // int getEnemyX();
+        // int getEnemyY();
 };
 
 #endif
