@@ -431,6 +431,8 @@ void Player::breeding(Engimon* bapak, Engimon* emak) {
         addEngimonToInventory(anak);
         cout << "Congratulations!!! You get new " << anak->getSpecies() << endl;
         cout << anak->getName() << " added to inventory" << endl;
+        bapak->levelDown(30);
+        emak->levelDown(30);
     }
     else
     {
