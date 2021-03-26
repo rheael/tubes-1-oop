@@ -45,13 +45,13 @@ class Engimon{
         bool isSkillFull();
         // virtual methods
         virtual void showData();
-        virtual void talk()=0;
-        virtual bool punyaElemen(string)=0;
-        virtual int nbEl()=0;
-        virtual string getParent1Species()=0;
-        virtual string getParent2Species()=0;
-        virtual Element getElemen()=0;
-        virtual string getSpecies()=0;
+        virtual void talk();
+        virtual bool punyaElemen(string);
+        virtual int nbEl();
+        virtual string getParent1Species();
+        virtual string getParent2Species();
+        virtual Element getElemen();
+        virtual string getSpecies();
 };
 
 class Charmamon: public Engimon{
