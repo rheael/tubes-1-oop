@@ -183,6 +183,7 @@ bool Player::battle(Engimon* musuh){
         // active engimon menerima exp
         // asumsi besarannya 35
         currentEngimon->addExp(35);
+        currentEngimon->levelUp();
 
         // mendapatkan engimon lawan
         addEngimonToInventory(musuh);

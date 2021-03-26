@@ -48,6 +48,24 @@ void checkMaxSpawnedEngimon(int max) {
     }
 }
 
+void startAscii(){
+
+cout << "    █▀▀▄░░░░░░░░░░░▄▀▀█ " << endl;
+cout << "░█░░░▀▄░▄▄▄▄▄░▄▀░░░█          W i l l y  W a n g k y   &   t  h  e" << endl;
+cout << "░░▀▄░░░▀░░░░░▀░░░▄▀                            .__ " << endl;                      
+cout << "░░░░▌░▄▄░░░▄▄░▐▀▀          ____   ____    ____ |__| _____   ____   ____ " << endl; 
+cout << "░░░▐░░█▄░░░▄█░░▌▄▄▀▀▀▀█  _/ __ \\ /    \\  / ___\\|  |/     \\ /  _ \\ /    \\ " << endl;
+cout << "░░░▌▄▄▀▀░▄░▀▀▄▄▐░░░░░░█  \\  ___/|   |  \\/ /_/  >  |  Y Y  (  <_> )   |  \\" << endl;
+cout << "▄▀▀▐▀▀░▄▄▄▄▄░▀▀▌▄▄▄░░░█   \\___  >___|  /\\___  /|__|__|_|  /\\____/|___|  /" << endl;
+cout << "█░░░▀▄░█░░░█░▄▀░░░░█▀▀▀    _____     \\//_____/ __       \\/            \\/ " << endl;
+cout << "░▀▄░░▀░░▀▀▀░░▀░░░▄█▀     _/ ____\\____    _____/  |_  ___________ ___.__. " << endl;
+cout << "░░░█░░░░░░░░░░░▄▀▄░▀▄    \\   __\\__  \\ _/ ___\\   __\\/  _ \\_  __ <   |  | " << endl;
+cout << "░░░█░░░░░░░░░▄▀█░░█░░█    |  |   / __ \\\\  \\___|  | (  <_> )  | \\/\\___  | " << endl;
+cout << "░░░█░░░░░░░░░░░█▄█░░▄▀    |__|  (____  /\\___  >__|  \\____/|__|   / ____| " << endl;
+cout << "░░░█░░░░░░░░░░░████▀                \\/     \\/                   \\/      " << endl;
+cout << "░░░▀▄▄▀▀▄▄▀▀▄▄▄█▀                                  b y    a n g r y m o n" << endl;
+}
+
 int main() {
     // KAMUS
     string input;
@@ -82,12 +100,13 @@ int main() {
     }
     cout << endl;
     m.displayMap();
-
+    startAscii();
     // Starter pack
     haveAGreatTime();
     P->displayInventorySkill();
     P->displayInventoryEngimon();
     cout << "Active Engimon: " << P->getActiveEngimon()->getName() << endl << endl;
+    
     printHelp();
 
     // Time to play!
