@@ -16,9 +16,9 @@ Player::Player() {
 
     //Inisialisasi inventory engimon
     Charmamon *C = new Charmamon("Charmamon");
-    C->setLevel(30);
+    C->setLevel(50);
     Pikamon *P = new Pikamon("Pikamon");
-    P->setLevel(30);
+    P->setLevel(50);
     Rotomon *R = new Rotomon("Rotomon");
     R->setLevel(1);
     addEngimonToInventory(C);
